@@ -30,7 +30,7 @@ An API key is required in order to issue calls to the Brave Search API. Get star
 
 ## Compatibility
 
-Tested locally against version 1.84.3.
+Tested locally against n8n v1.84.3.
 
 ## Usage
 

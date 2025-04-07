@@ -3,12 +3,15 @@
   "version": "0.1.0",
   "description": "A n8n node for the Brave Search API",
   "keywords": [
+    "api",
+    "search",
+    "brave",
     "brave search",
     "brave search api",
     "n8n-community-node-package"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/brave/",
+  "homepage": "https://www.npmjs.com/package/n8n-nodes-brave-search",
   "author": {
     "name": "Sampson",
     "email": "sampson@brave.com"

@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-base.BraveSearch",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["AI", "Productivity", "Miscellaneous", "Utility"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://api-dashboard.search.brave.com/app/documentation"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://api-dashboard.search.brave.com/app/documentation"
+			}
+		]
+	}
+}

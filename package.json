@@ -11,7 +11,7 @@
     "n8n-community-node-package"
   ],
   "license": "MIT",
-  "homepage": "https://www.npmjs.com/package/n8n-nodes-brave-search",
+  "homepage": "https://www.npmjs.com/package/@brave/n8n-nodes-brave-search",
   "author": {
     "name": "Sampson",
     "email": "sampson@brave.com"

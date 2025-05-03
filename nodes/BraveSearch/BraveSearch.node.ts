@@ -69,7 +69,7 @@ export class BraveSearch implements INodeType {
 			);
 
 			// Query the Brave Search API
-			const response = await this.helpers.requestWithAuthentication.bind(this)('BraveSearchApi', {
+			const response = await this.helpers.requestWithAuthentication.call(this, 'braveSearchApi', {
 				url: `https://api.search.brave.com/res/v1${endpoint.ENDPOINT}`,
 				qs: endpoint.buildQuery(params),
 				json: true,

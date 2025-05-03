@@ -41,7 +41,7 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/BraveSearchApi/BraveSearchApi.credentials.js"
+      "dist/credentials/BraveSearchApi.credentials.js"
     ],
     "nodes": [
       "dist/nodes/BraveSearch/BraveSearch.node.js"

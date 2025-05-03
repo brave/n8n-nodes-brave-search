@@ -5,7 +5,7 @@ import {
 	INodeProperties,
 } from 'n8n-workflow';
 
-export class braveSearchApi implements ICredentialType {
+export class BraveSearchApi implements ICredentialType {
 	name = 'braveSearchApi';
 	icon = 'file:../nodes/BraveSearch/braveSearch.svg' as const;
 	displayName = 'Brave Search API';

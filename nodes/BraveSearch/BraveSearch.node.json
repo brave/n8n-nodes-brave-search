@@ -2,7 +2,7 @@
 	"node": "n8n-nodes-base.BraveSearch",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
-	"categories": ["AI", "Productivity", "Miscellaneous", "Utility"],
+	"categories": ["Productivity", "Miscellaneous", "Utility"],
 	"resources": {
 		"credentialDocumentation": [
 			{

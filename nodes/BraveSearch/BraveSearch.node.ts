@@ -45,6 +45,7 @@ export class BraveSearch implements INodeType {
 			/* eslint-enable n8n-nodes-base/node-param-default-wrong-for-options */
 			...ENDPOINTS.flatMap((e) => e.PROPERTIES),
 		],
+		usableAsTool: true,
 	};
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][] | null> {

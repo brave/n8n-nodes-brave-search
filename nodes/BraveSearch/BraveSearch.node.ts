@@ -1,4 +1,5 @@
 import {
+	NodeApiError,
 	type IExecuteFunctions,
 	type INodeExecutionData,
 	type INodeType,
@@ -49,38 +50,69 @@ export class BraveSearch implements INodeType {
 	};
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][] | null> {
-		// Maybe get data from previous node
 		const items = this.getInputData();
 		const raw_results: any[] = [];
-
-		// Runs for each input item received from the previous node
 		for (let i = 0; i < items.length; i++) {
-			// TODO (Sampson): Implement a better rate limiting strategy
-			await new Promise((resolve) => setTimeout(resolve, 1100));
-
-			// Determine which API endpoint will be queried
-			const endpointKey = this.getNodeParameter('endpoint', i) as string;
-			const endpoint = ENDPOINT_MAP[endpointKey];
-
-			// Construct the parameters for the API request
-			const params = Object.fromEntries(
-				endpoint.PROPERTIES.map((param) => {
-					return [param.name, this.getNodeParameter(param.name, i)];
-				}),
-			);
-
-			// Query the Brave Search API
-			const response = await this.helpers.requestWithAuthentication.call(this, 'braveSearchApi', {
-				url: `https://api.search.brave.com/res/v1${endpoint.ENDPOINT}`,
-				qs: endpoint.buildQuery(params),
-				json: true,
-			});
-
-			// Add response for this item to the return data
-			raw_results.push(response);
+			const result = await BraveSearch.performRequest(this, i);
+			raw_results.push(result);
 		}
 
-		// Leverage the n8n's `returnJsonArray` to format the response data appropriately
 		return [this.helpers.returnJsonArray(raw_results)];
+	}
+
+	static buildParams(ctx: IExecuteFunctions, endpoint: any, index: number): Record<string, any> {
+		const params = Object.fromEntries(
+			endpoint.PROPERTIES.map((param: any) => [
+				param.name,
+				ctx.getNodeParameter(param.name, index),
+			]),
+		);
+
+		return params;
+	}
+
+	static async handleRateLimitHeaders(response: any): Promise<void> {
+		const rlResetHeader = response.headers['x-ratelimit-reset'];
+		if (rlResetHeader) {
+			const [perSecReset] = rlResetHeader.split(',').map((v: string) => parseInt(v.trim(), 10));
+			if (!isNaN(perSecReset) && perSecReset > 0) {
+				await new Promise((resolve) => setTimeout(resolve, perSecReset * 1000));
+			}
+		}
+	}
+
+	static async performRequest(ctx: IExecuteFunctions, index: number): Promise<any> {
+		const maxTries = 5;
+		let attempt = 0;
+		let response = null;
+
+		while (attempt < maxTries) {
+			try {
+				const endpointKey = ctx.getNodeParameter('endpoint', index) as string;
+				const endpoint = ENDPOINT_MAP[endpointKey];
+				const params = BraveSearch.buildParams(ctx, endpoint, index);
+
+				response = await ctx.helpers.requestWithAuthentication.call(ctx, 'braveSearchApi', {
+					url: `https://api.search.brave.com/res/v1${endpoint.ENDPOINT}`,
+					qs: endpoint.buildQuery(params),
+					json: true,
+					resolveWithFullResponse: true,
+				});
+
+				await BraveSearch.handleRateLimitHeaders(response);
+
+				return response.body;
+			} catch (error: any) {
+				if (error.statusCode === 429) {
+					await BraveSearch.handleRateLimitHeaders(error.response);
+					attempt++;
+					continue;
+				}
+
+				throw error;
+			}
+		}
+
+		throw new NodeApiError(ctx.getNode(), response.body);
 	}
 }

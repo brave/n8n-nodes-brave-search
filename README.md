@@ -15,6 +15,7 @@ Power your search and AI apps with the fastest growing independent search engine
 - [Compatibility](#compatibility)
 - [Usage](#usage)
 - [Resources](#resources)
+- [Development](#development)
 - [Version history](#version-history)
 
 ## Installation
@@ -31,7 +32,7 @@ An API key is required in order to issue calls to the Brave Search API. Get star
 
 ## Compatibility
 
-Tested locally against n8n v1.90.2.
+Tested locally against n8n v1.93.0.
 
 ## Usage
 
@@ -41,6 +42,21 @@ You should familarize yourself with the various _response objects_, to understan
 
 * [n8n community nodes documentation](https://docs.n8n.io/integrations/community-nodes/)
 * [Brave Search API documentation](https://api-dashboard.search.brave.com/app/documentation/)
+
+## Development
+
+To streamline and accelerate the development process, follow these steps:
+
+1. Install _n8n_ globally (`pnpm add -g n8n`).
+2. Set the `N8N_CUSTOM_EXTENSIONS` environment variable to the `/dist` directory of this repository.
+3. Enable hot reloading by setting the `N8N_DEV_RELOAD` environment variable to `true`.
+4. Run `pnpm run dev` to watch for changes and automatically rebuild the node as you develop.
+5. Start n8n with `n8n start` to launch the editor UI.
+6. Open the n8n editor UI in your browser.
+
+You should now be able to search for and use the Brave Search node in your n8n workflows.
+
+> **Note:** When launching n8n locally for the first time, you will be prompted to create a user account. If you forget your credentials, you can reset n8n to its initial state by running `n8n user-management:reset`.
 
 ## Version history
 

@@ -1,6 +1,6 @@
 import type { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 
-export interface BraveEndpoint {
+export interface BraveSearchOperation {
 	KEY: string;
 	ENDPOINT: string;
 	OPTION: INodePropertyOptions;

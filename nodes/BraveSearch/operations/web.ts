@@ -1,5 +1,5 @@
 import type { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
-import { BraveEndpoint } from './baseEndpoint';
+import { BraveSearchOperation } from './_base';
 
 const KEY: string = 'web';
 const ENDPOINT: string = '/web/search';
@@ -7,7 +7,8 @@ const ENDPOINT: string = '/web/search';
 const OPTION: INodePropertyOptions = {
 	name: 'Web Search',
 	value: KEY,
-	description: 'Search the web',
+	description: 'Search the Web',
+	action: 'Search the Web',
 };
 
 const PROPERTIES: INodeProperties[] = [
@@ -36,7 +37,7 @@ const PROPERTIES: INodeProperties[] = [
 		...param,
 		displayOptions: {
 			show: {
-				endpoint: [KEY],
+				operation: [KEY],
 			},
 		},
 	};
@@ -47,7 +48,7 @@ const buildQuery = (query: Record<string, any>) => {
 	return { q, ...rest }; // Return the new object
 };
 
-export default { KEY, ENDPOINT, OPTION, PROPERTIES, buildQuery } satisfies BraveEndpoint;
+export default { KEY, ENDPOINT, OPTION, PROPERTIES, buildQuery } satisfies BraveSearchOperation;
 
 // TODO: Add advanced options
 // {

@@ -6,7 +6,7 @@ import {
 	type INodeTypeDescription,
 } from 'n8n-workflow';
 
-import { ENDPOINTS, ENDPOINT_MAP } from './endpoints';
+import { OPERATIONS, PROPERTIES } from './operations';
 
 /**
  * https://docs.n8n.io/integrations/creating-nodes/overview/
@@ -18,6 +18,7 @@ export class BraveSearch implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Brave Search',
 		name: 'braveSearch',
+		subtitle: '={{$parameter["operation"]}}',
 		icon: 'file:braveSearch.svg',
 		group: ['transform'],
 		version: 1,
@@ -38,20 +39,7 @@ export class BraveSearch implements INodeType {
 				Accept: 'application/json',
 			},
 		},
-		properties: [
-			/* eslint-disable n8n-nodes-base/node-param-default-wrong-for-options */
-			{
-				displayName: 'Endpoint',
-				description: 'The endpoint to use for the Brave Search API',
-				name: 'endpoint',
-				type: 'options',
-				options: ENDPOINTS.map(({ OPTION }) => OPTION),
-				default: 'web',
-				required: true,
-			},
-			/* eslint-enable n8n-nodes-base/node-param-default-wrong-for-options */
-			...ENDPOINTS.flatMap((e) => e.PROPERTIES),
-		],
+		properties: PROPERTIES,
 		usableAsTool: true,
 	};
 
@@ -93,12 +81,12 @@ export class BraveSearch implements INodeType {
 	}
 
 	static async performRequest(ctx: IExecuteFunctions, index: number): Promise<any> {
-		const endpoint = ENDPOINT_MAP[ctx.getNodeParameter('endpoint', index) as string];
-		const params = BraveSearch.buildParams(ctx, endpoint, index);
+		const operation = OPERATIONS[ctx.getNodeParameter('operation', index) as string];
+		const params = BraveSearch.buildParams(ctx, operation, index);
 
 		const response = await ctx.helpers.requestWithAuthentication.call(ctx, 'braveSearchApi', {
-			url: `https://api.search.brave.com/res/v1${endpoint.ENDPOINT}`,
-			qs: endpoint.buildQuery(params),
+			url: `https://api.search.brave.com/res/v1${operation.ENDPOINT}`,
+			qs: operation.buildQuery(params),
 			json: true,
 		});
 

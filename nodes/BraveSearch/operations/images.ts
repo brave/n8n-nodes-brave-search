@@ -1,13 +1,14 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
-import { BraveEndpoint } from './baseEndpoint';
+import { BraveSearchOperation } from './_base';
 
-const KEY = 'news';
-const ENDPOINT = '/news/search';
+const KEY = 'images';
+const ENDPOINT = '/images/search';
 
 const OPTION: INodePropertyOptions = {
-	name: 'News Search',
+	name: 'Image Search',
 	value: KEY,
-	description: 'Search for news',
+	description: 'Search for Images',
+	action: 'Search for Images',
 };
 
 const PROPERTIES: INodeProperties[] = [
@@ -24,12 +25,12 @@ const PROPERTIES: INodeProperties[] = [
 		displayName: 'Count',
 		name: 'count',
 		type: 'number' as const,
-		default: 20,
+		default: 50,
 		description:
-			'The number of search results returned in response. The maximum is 50. The actual number delivered may be less than requested. Combine this parameter with offset to paginate search results.',
+			'The number of image results returned in response. The maximum is 100. The actual number delivered may be less than requested.',
 		typeOptions: {
 			minValue: 1,
-			maxValue: 50,
+			maxValue: 100,
 		},
 	},
 ].map((param) => {
@@ -37,7 +38,7 @@ const PROPERTIES: INodeProperties[] = [
 		...param,
 		displayOptions: {
 			show: {
-				endpoint: [KEY],
+				operation: [KEY],
 			},
 		},
 	};
@@ -48,4 +49,4 @@ const buildQuery = (query: Record<string, any>) => {
 	return { q, ...rest }; // Return the new object
 };
 
-export default { KEY, ENDPOINT, OPTION, PROPERTIES, buildQuery } satisfies BraveEndpoint;
+export default { KEY, ENDPOINT, OPTION, PROPERTIES, buildQuery } satisfies BraveSearchOperation;

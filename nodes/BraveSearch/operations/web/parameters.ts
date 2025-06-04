@@ -1,17 +1,10 @@
-import type { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
-import { BraveSearchOperation } from './_base';
+import type { INodeProperties } from 'n8n-workflow/dist/Interfaces';
 
-const KEY: string = 'web';
-const ENDPOINT: string = '/web/search';
+const parameters: INodeProperties[] = [];
+const optional_parameters: INodeProperties['options'] = [];
 
-const OPTION: INodePropertyOptions = {
-	name: 'Web Search',
-	value: KEY,
-	description: 'Search the Web',
-	action: 'Search the Web',
-};
-
-const PROPERTIES: INodeProperties[] = [
+// The parameters for this operation
+parameters.push(
 	{
 		displayName: 'Query',
 		name: 'query',
@@ -32,23 +25,23 @@ const PROPERTIES: INodeProperties[] = [
 			maxValue: 20,
 		},
 	},
-].map((param) => {
-	return {
-		...param,
-		displayOptions: {
-			show: {
-				operation: [KEY],
-			},
-		},
-	};
-});
+);
 
-const buildQuery = (query: Record<string, any>) => {
-	const { query: q, ...rest } = query; // Destructure 'query' as 'q' and collect the rest
-	return { q, ...rest }; // Return the new object
-};
+// Optional Parameters
+// optional_parameters.push({ ... });
 
-export default { KEY, ENDPOINT, OPTION, PROPERTIES, buildQuery } satisfies BraveSearchOperation;
+if (optional_parameters.length > 0) {
+	parameters.push({
+		displayName: 'Additional Parameters',
+		name: 'additionalParameters',
+		type: 'collection' as const,
+		default: {},
+		placeholder: 'Add Parameter',
+		options: optional_parameters,
+	});
+}
+
+export default parameters satisfies INodeProperties[];
 
 // TODO: Add advanced options
 // {

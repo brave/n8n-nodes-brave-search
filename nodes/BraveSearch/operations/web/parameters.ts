@@ -1,4 +1,4 @@
-import type { INodeProperties } from 'n8n-workflow/dist/Interfaces';
+import type { INodeProperties } from 'n8n-workflow';
 
 const parameters: INodeProperties[] = [];
 const optional_parameters: INodeProperties['options'] = [];

@@ -1,4 +1,4 @@
-import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import type { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 import { BraveSearchOperation } from '../_base';
 
 import parameters from './parameters';

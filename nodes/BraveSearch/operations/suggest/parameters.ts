@@ -26,7 +26,7 @@ parameters.push(
 			minValue: 1,
 			maxValue: 20,
 		},
-	}
+	},
 );
 
 // Optional Parameters
@@ -62,9 +62,8 @@ optional_parameters.push(
 		name: 'rich',
 		type: 'boolean' as const,
 		default: false,
-		description:
-			'Whether to enhance suggestions with rich results',
-        hint: 'Requires a paid <em>Suggest</em> subscription',
+		description: 'Whether to enhance suggestions with rich results',
+		hint: 'Requires a paid <em>Suggest</em> subscription',
 	},
 );
 

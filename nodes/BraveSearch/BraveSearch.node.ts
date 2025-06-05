@@ -85,7 +85,7 @@ export class BraveSearch implements INodeType {
 				params[name] = nodeParam as NodeParameterValue;
 			}
 		}
-		ctx.logger.debug(`Params for operation: ${operation.key}: ` + JSON.stringify(params, null, 4));
+
 		return params;
 	}
 

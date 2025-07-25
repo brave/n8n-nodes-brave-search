@@ -47,17 +47,44 @@ You should familarize yourself with the various _response objects_, to understan
 
 To streamline and accelerate the development process, follow these steps:
 
+### Quick Start (Recommended)
+
 1. Install _n8n_ globally (`pnpm add -g n8n`).
-2. Set the `N8N_CUSTOM_EXTENSIONS` environment variable to the `/dist` directory of this repository.
-3. Enable hot reloading by setting the `N8N_DEV_RELOAD` environment variable to `true`.
-4. Run `pnpm run dev` to watch for changes and automatically rebuild the node as you develop.
-5. Start n8n with `n8n start` to launch the editor UI.
-6. Open the n8n editor UI in your browser.
+2. Install dependencies: `pnpm install`
+3. Run the full development environment: `pnpm run dev:full`
+4. Open the n8n editor UI in your browser (typically at http://localhost:5678).
+
+The `dev:full` script automatically:
+- Builds the project
+- Starts TypeScript compilation in watch mode
+- Launches n8n with the proper environment variables set
+- Enables hot reloading for development
+
+### Manual Development Setup
+
+If you prefer to run commands separately:
+
+1. Install _n8n_ globally (`pnpm add -g n8n`).
+2. Install dependencies: `pnpm install`
+3. Build the project: `pnpm build`
+4. Start TypeScript watch mode: `pnpm dev`
+5. In a separate terminal, start n8n: `pnpm run dev:n8n`
+
+### Alternative: System Environment Variables
+
+You can also set environment variables manually if preferred:
+- Set `N8N_CUSTOM_EXTENSIONS` to the `/dist` directory of this repository
+- Set `N8N_DEV_RELOAD` to `true`
+- Run `pnpm run dev` and `n8n start` separately
 
 You should now be able to search for and use the Brave Search node in your n8n workflows.
 
-> **Note:** When launching n8n locally for the first time, you will be prompted to create a user account. If you forget your credentials, you can reset n8n to its initial state by running `n8n user-management:reset`.
+### First-Time Setup Notes
 
-## Version history
-
-- 1.0.0 &mdash; Initial release of the Brave Search API n8n node
+> **Important:** When launching n8n locally for the first time, the startup process may take 1-2 minutes to initialize. Wait for the "Editor is now accessible via web browser" message in the terminal before opening your browser.
+> 
+> On first access to http://localhost:5678, you'll be prompted to create an admin user account for your local n8n instance. 
+> 
+> **Remember:** You'll need to configure your Brave Search API credentials in the n8n interface before the node will function. See the [Credentials](#credentials) section above for API key information.
+> 
+> If you encounter issues or need to start fresh, you can reset n8n to its initial state by running `n8n user-management:reset`.

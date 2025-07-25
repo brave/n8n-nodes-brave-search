@@ -30,6 +30,8 @@
     "preinstall": "npx only-allow pnpm",
     "build": "tsc && gulp build:icons",
     "dev": "tsc --watch",
+    "dev:n8n": "cross-env N8N_CUSTOM_EXTENSIONS=./dist N8N_DEV_RELOAD=true n8n start",
+    "dev:full": "pnpm build && concurrently \"pnpm dev\" \"pnpm dev:n8n\"",
     "format": "prettier nodes credentials --write",
     "lint": "eslint nodes credentials package.json",
     "lintfix": "eslint nodes credentials package.json --fix",
@@ -50,6 +52,8 @@
   "devDependencies": {
     "@types/node": "22.16.5",
     "@typescript-eslint/parser": "8.38.0",
+    "concurrently": "^9.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "8.57.1",
     "eslint-plugin-n8n-nodes-base": "1.16.3",
     "gulp": "4.0.2",

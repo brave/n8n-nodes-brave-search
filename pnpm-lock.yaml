@@ -14,8 +14,8 @@ importers:
   .:
     dependencies:
       n8n-workflow:
-        specifier: 1.102.0
-        version: 1.102.0
+        specifier: 1.105.0
+        version: 1.105.0
     devDependencies:
       '@types/node':
         specifier: 22.17.2
@@ -77,6 +77,9 @@ packages:
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
     deprecated: Use @eslint/object-schema instead
+
+  '@n8n/errors@0.4.0':
+    resolution: {integrity: sha512-+xMu7nnLTWmYOpBzghAKGpJS9+hN6hjAVb3dW12v4k88bYEP9cpnHLeEkt1c2+85P0CtxiVYJoly4IS76V0/MQ==}
 
   '@n8n/tournament@1.0.6':
     resolution: {integrity: sha512-UGSxYXXVuOX0yL6HTLBStKYwLIa0+JmRKiSZSCMcM2s2Wax984KWT6XIA1TR/27i7yYpDk1MY14KsTPnuEp27A==}
@@ -1110,8 +1113,8 @@ packages:
     resolution: {integrity: sha512-kDcwXR4PS7caBpuRYYBUz9iVixUk3anO3f5OYFiIPwK/20vCzKCHyKoulbiDY1S53zD2bxUpxN/IJ+TnXjfvxg==}
     engines: {node: '>= 0.10'}
 
-  n8n-workflow@1.102.0:
-    resolution: {integrity: sha512-t+jsEEyq/+Vt2dkKWB5JiJFfxJb6fScTzef/hTTj/S5H1g8VnL1A/EHtHhaikfJAZ5K2fV7GZNx3nS9Bi+0r3g==}
+  n8n-workflow@1.105.0:
+    resolution: {integrity: sha512-8aFcQzeob1TZPu65F4ZWD2k439aUfjEUqj2I69p1REtbLbWJiIq5Mt3lXdwOtg0znTlaYnL1jBp0VwkgrtOPjA==}
 
   nan@2.23.0:
     resolution: {integrity: sha512-1UxuyYGdoQHcGg87Lkqm3FzefucTa0NAiOcuRsDmysep3c1LVCRK2krrUDafMWtjSG04htvAmvg96+SDknOmgQ==}
@@ -1747,6 +1750,10 @@ snapshots:
   '@humanwhocodes/module-importer@1.0.1': {}
 
   '@humanwhocodes/object-schema@2.0.3': {}
+
+  '@n8n/errors@0.4.0':
+    dependencies:
+      callsites: 3.1.0
 
   '@n8n/tournament@1.0.6':
     dependencies:
@@ -2916,8 +2923,9 @@ snapshots:
 
   mute-stdout@1.0.1: {}
 
-  n8n-workflow@1.102.0:
+  n8n-workflow@1.105.0:
     dependencies:
+      '@n8n/errors': 0.4.0
       '@n8n/tournament': 1.0.6
       ast-types: 0.15.2
       callsites: 3.1.0

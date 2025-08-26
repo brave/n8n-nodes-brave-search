@@ -24,7 +24,7 @@
     "node": ">=18.10",
     "pnpm": ">=9.1"
   },
-  "packageManager": "pnpm@9.15.9",
+  "packageManager": "pnpm@10.15.0",
   "main": "index.js",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
@@ -35,7 +35,7 @@
     "format": "prettier nodes credentials --write",
     "lint": "eslint nodes credentials package.json",
     "lintfix": "eslint nodes credentials package.json --fix",
-    "prepublishOnly": "pnpm build && pnpm lint -c .eslintrc.prepublish.js nodes credentials package.json"
+    "prepublishOnly": "pnpm build && pnpm lint -c eslint.prepublish.config.mjs nodes credentials package.json"
   },
   "files": [
     "dist"
@@ -50,24 +50,28 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "22.17.2",
-    "@typescript-eslint/parser": "8.38.0",
-    "concurrently": "9.1.0",
-    "cross-env": "7.0.3",
-    "eslint": "8.57.1",
+    "@types/node": "24.3.0",
+    "@typescript-eslint/parser": "8.41.0",
+    "concurrently": "9.2.1",
+    "cross-env": "10.0.0",
+    "eslint": "9.34.0",
     "eslint-plugin-n8n-nodes-base": "1.16.3",
-    "gulp": "4.0.2",
+    "globals": "16.3.0",
+    "gulp": "5.0.1",
+    "jsonc-eslint-parser": "2.4.0",
     "prettier": "3.6.2",
-    "typescript": "5.8.3"
+    "typescript": "5.9.2"
   },
   "peerDependencies": {
     "n8n-workflow": "1.105.0"
   },
   "pnpm": {
     "overrides": {
-      "braces": "3.0.3",
-      "micromatch": "4.0.8",
       "form-data": "4.0.4"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "es5-ext",
+      "eslint-plugin-n8n-nodes-base"
+    ]
   }
 }

@@ -1,5 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
-import { country_codes, language_codes, market_codes } from '../_base';
+import { CountryCodes, LanguageCodes, MarketCodes } from './data';
 
 const parameters: INodeProperties[] = [];
 const optional_parameters: INodeProperties['options'] = [];
@@ -39,7 +39,7 @@ optional_parameters.push(
 		default: 'US',
 		description:
 			'The search query country, where the results come from. The country string is limited to 2 character country codes of supported countries.',
-		options: country_codes.map(({ country, code }) => ({ name: country, value: code })),
+		options: CountryCodes.map(({ country, code }) => ({ name: country, value: code })),
 	},
 	{
 		displayName: 'Search Language',
@@ -49,10 +49,7 @@ optional_parameters.push(
 		default: 'en',
 		description:
 			'The language of the search query. The language string is limited to 2 character language codes of supported languages.',
-		options: language_codes.map(({ language, code }) => ({
-			name: language,
-			value: code,
-		})),
+		options: LanguageCodes.map(({ language, code }) => ({ name: language, value: code })),
 	},
 	{
 		displayName: 'User Interface Language',
@@ -62,7 +59,7 @@ optional_parameters.push(
 		default: 'en-US',
 		description:
 			'User interface language preferred in response. Usually of the format <language_code>-<country_code>. For more, see <a href="https://www.rfc-editor.org/rfc/rfc9110.html#name-accept-language">RFC 9110</a>.',
-		options: market_codes.map(({ country, language, code }) => ({
+		options: MarketCodes.map(({ country, language, code }) => ({
 			name: `${language} (${country})`,
 			value: code,
 		})),
@@ -73,7 +70,7 @@ optional_parameters.push(
 		type: 'number',
 		default: 0,
 		description:
-			'The number of results to skip before returning results. The default is 0. Combine this parameter with `count` to paginate search results.',
+			'The number of result sets to skip before returning results. The default is 0. Combine this parameter with <code>count</code> to paginate search results.',
 		typeOptions: {
 			minValue: 0,
 			maxValue: 9,
@@ -112,7 +109,7 @@ optional_parameters.push(
 		name: 'freshness',
 		type: 'options',
 		default: '',
-		description: 'The freshness of the search query',
+		description: 'The freshness of the search query results',
 		options: [
 			{
 				name: 'All Time',
@@ -148,9 +145,14 @@ optional_parameters.push(
 		displayName: 'Goggles',
 		name: 'goggles',
 		type: 'string',
-		default: '',
+		typeOptions: {
+			multipleValues: true,
+			multipleValueButtonText: 'Add Goggle URL',
+		},
+		default: [],
 		description:
-			'Goggles act as a custom re-ranking on top of Brave’s search index. The parameter supports both a URL where the Goggle is hosted or the definition of the Goggle. For more details, refer to the <a href="https://github.com/brave/goggles-quickstart">Goggles repository</a>. The parameter can be repeated to query with multiple goggles.',
+			'Goggles act as a custom re-ranking on top of Brave’s search index. The parameter supports one or more URLs where the desired Goggle(s) will be found.',
+		placeholder: 'Example: https://raw.githubusercontent.com/…/tech_blogs.goggle',
 	},
 );
 

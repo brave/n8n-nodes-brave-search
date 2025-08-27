@@ -1,6 +1,6 @@
 /**
  * Country Codes: For use with the `country` parameter.
- * @see https://api-dashboard.search.brave.com/app/documentation/suggest/codes#country-codes
+ * @see https://api-dashboard.search.brave.com/app/documentation/image-search/codes#country-codes
  */
 export const CountryCodes: { country: string; code: string }[] = [
 	{
@@ -154,8 +154,8 @@ export const CountryCodes: { country: string; code: string }[] = [
 ];
 
 /**
- * Language Codes: For use with the `lang` parameter.
- * @see https://api-dashboard.search.brave.com/app/documentation/suggest/codes#language-codes
+ * Language Codes: For use with the `search_lang` parameter.
+ * @see https://api-dashboard.search.brave.com/app/documentation/image-search/codes#language-codes
  */
 export const LanguageCodes: { language: string; code: string }[] = [
 	{

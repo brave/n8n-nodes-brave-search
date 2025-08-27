@@ -1,4 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { CountryCodes, LanguageCodes, MarketCodes } from './data';
 
 const parameters: INodeProperties[] = [];
 const optional_parameters: INodeProperties['options'] = [];
@@ -19,7 +20,8 @@ parameters.push(
 		name: 'count',
 		type: 'number' as const,
 		default: 10,
-		description: 'Number of results to return. Must be between 1 and 20.',
+		description:
+			'Number of results to return. Must be between 1 and 20. Combine with `offset` to paginate search results.',
 		typeOptions: {
 			minValue: 1,
 			maxValue: 20,
@@ -28,7 +30,208 @@ parameters.push(
 );
 
 // Optional Parameters
-// optional_parameters.push({ ... });
+optional_parameters.push(
+	{
+		displayName: 'Country',
+		name: 'country',
+		type: 'options',
+		// eslint-disable-next-line n8n-nodes-base/node-param-default-wrong-for-options
+		default: 'US',
+		description: 'The search query country, where the results come from',
+		options: CountryCodes.map(({ country: name, code: value }) => ({ name, value })),
+	},
+	{
+		displayName: 'Search Language',
+		name: 'search_lang',
+		type: 'options',
+		// eslint-disable-next-line n8n-nodes-base/node-param-default-wrong-for-options
+		default: 'en',
+		description: 'The search language preference',
+		options: LanguageCodes.map(({ language: name, code: value }) => ({ name, value })),
+	},
+	{
+		displayName: 'User Interface Language',
+		name: 'ui_lang',
+		type: 'options',
+		// eslint-disable-next-line n8n-nodes-base/node-param-default-wrong-for-options
+		default: 'en-US',
+		description: 'The user interface language preference',
+		options: MarketCodes.map(({ country, language, code }) => ({
+			name: `${language} (${country})`,
+			value: code,
+		})),
+	},
+	{
+		displayName: 'Offset',
+		name: 'offset',
+		type: 'number',
+		default: 0,
+		description:
+			'The number of result sets to skip before returning results. The default is 0. Combine this parameter with <code>count</code> to paginate search results.',
+		typeOptions: {
+			minValue: 0,
+			maxValue: 9,
+		},
+	},
+	{
+		displayName: 'Safe Search',
+		name: 'safesearch',
+		type: 'options',
+		default: 'moderate',
+		description: 'Filters search results for adult content',
+		options: [
+			{
+				name: 'Off',
+				value: 'off',
+			},
+			{
+				name: 'Moderate',
+				value: 'moderate',
+			},
+			{
+				name: 'Strict',
+				value: 'strict',
+			},
+		],
+	},
+	{
+		displayName: 'Freshness',
+		name: 'freshness',
+		type: 'options',
+		default: '',
+		description: 'Filters search results by when they were discovered',
+		options: [
+			{
+				name: 'All Time',
+				value: '',
+			},
+			{
+				name: 'Past 24 Hours',
+				value: 'pd',
+			},
+			{
+				name: 'Past 7 Days',
+				value: 'pw',
+			},
+			{
+				name: 'Past Month',
+				value: 'pm',
+			},
+			{
+				name: 'Past Year',
+				value: 'py',
+			},
+		],
+	},
+	{
+		displayName: 'Text Decorations',
+		name: 'text_decorations',
+		type: 'boolean',
+		default: true,
+		description:
+			'Whether display strings (e.g. result snippets) should include decoration markers (e.g. highlighting characters).',
+	},
+	{
+		displayName: 'Spellcheck',
+		name: 'spellcheck',
+		type: 'boolean',
+		default: true,
+		description:
+			'Whether to spellcheck the provided query. If enabled, the modified query is always used for search. The modified query can be found in <code>altered</code> key from the <a href="https://api-dashboard.search.brave.com/app/documentation/web-search/responses#Query">query</a> response model.',
+	},
+	{
+		displayName: 'Result Filter',
+		name: 'result_filter',
+		type: 'multiOptions',
+		default: ['web'],
+		description:
+			'Which result types to permit in the search response (e.g. discussions, videos). Not specifying this parameter will return back all result types in search response where data is available and a plan with the corresponding option is subscribed. The response always includes <code>query</code> and <code>type</code> to identify any query modifications and response type respectively.',
+		options: [
+			{
+				name: 'Discussions',
+				value: 'discussions',
+			},
+			{
+				name: 'FAQ',
+				value: 'faq',
+			},
+			{
+				name: 'Infobox',
+				value: 'infobox',
+			},
+			{
+				name: 'Locations',
+				value: 'locations',
+			},
+			{
+				name: 'News',
+				value: 'news',
+			},
+			{
+				name: 'Summarizer',
+				value: 'summarizer',
+			},
+			{
+				name: 'Videos',
+				value: 'videos',
+			},
+			{
+				name: 'Web',
+				value: 'web',
+			},
+		],
+	},
+	{
+		displayName: 'Goggles',
+		name: 'goggles',
+		type: 'string',
+		typeOptions: {
+			multipleValues: true,
+			multipleValueButtonText: 'Add Goggle URL',
+		},
+		default: [],
+		description:
+			'Goggles act as a custom re-ranking on top of Brave’s search index. The parameter supports one or more URLs where the desired Goggle(s) will be found.',
+	},
+	{
+		displayName: 'Units',
+		name: 'units',
+		type: 'options',
+		default: '',
+		description:
+			'The measurement units. If not provided, units are derived from the search country.',
+		options: [
+			{
+				name: 'None',
+				value: '',
+			},
+			{
+				name: 'Metric',
+				value: 'metric',
+			},
+			{
+				name: 'Imperial',
+				value: 'imperial',
+			},
+		],
+	},
+	{
+		displayName: 'Extra Snippets',
+		name: 'extra_snippets',
+		type: 'boolean',
+		default: false,
+		description:
+			'Whether to include snippets. A snippet is an excerpt from a page you get as a result of the query, and <code>extra_snippets</code> allow you to get up to 5 additional, alternative excerpts. Only available under Free AI, Base AI, Pro AI, Base Data, Pro Data and Custom plans.',
+	},
+	{
+		displayName: 'Summary',
+		name: 'summary',
+		type: 'boolean',
+		default: false,
+		description:
+			'Whether to include summary key generation in web search results. This is required for summarizer to be enabled.',
+	},
+);
 
 if (optional_parameters.length > 0) {
 	parameters.push({
@@ -42,239 +245,3 @@ if (optional_parameters.length > 0) {
 }
 
 export default parameters satisfies INodeProperties[];
-
-// TODO: Add advanced options
-// {
-// 	displayName: 'Advanced Options',
-// 	name: 'advancedOptions',
-// 	type: 'collection',
-// 	default: {},
-// 	placeholder: 'Add Advanced Options',
-// 	description:
-// 		'Advanced options for the Brave Search API. These options are optional and can be used to customize the search results.',
-// 	options: [
-// 		{
-// 			displayName: 'Country',
-// 			name: 'country',
-// 			type: 'string',
-// 			default: 'US',
-// 			description:
-// 				'The search query country, where the results come from. Use 2-character country codes (e.g., US, GB).',
-// 		},
-// 		{
-// 			displayName: 'Search Language',
-// 			name: 'search_lang',
-// 			type: 'string',
-// 			default: 'en',
-// 			description:
-// 				'The search language preference. Use 2 or more character language codes (e.g., en, es).',
-// 		},
-// 		{
-// 			displayName: 'UI Language',
-// 			name: 'ui_lang',
-// 			type: 'string',
-// 			default: 'en-US',
-// 			description:
-// 				'User interface language preferred in response. Format: &lt;language_code&gt;-&lt;country_code&gt; (e.g., en-US).',
-// 		},
-// 		{
-// 			displayName: 'Count',
-// 			name: 'count',
-// 			type: 'number',
-// 			default: 10,
-// 			description: 'Number of results to return',
-// 			typeOptions: {
-// 				minValue: 1,
-// 				maxValue: 20,
-// 			},
-// 		},
-// 		{
-// 			displayName: 'Offset',
-// 			name: 'offset',
-// 			type: 'number',
-// 			default: 0,
-// 			description:
-// 				'The zero-based offset indicating the number of search results to skip before returning results. Maximum is 9.',
-// 		},
-// 		{
-// 			displayName: 'Safe Search',
-// 			name: 'safesearch',
-// 			type: 'options',
-// 			options: [
-// 				{
-// 					name: 'Off',
-// 					value: 'off',
-// 					description: 'No filtering is done',
-// 				},
-// 				{
-// 					name: 'Moderate',
-// 					value: 'moderate',
-// 					description:
-// 						'Filters explicit content like images and videos but allows adult domains in the search results',
-// 				},
-// 				{
-// 					name: 'Strict',
-// 					value: 'strict',
-// 					description: 'Drops all adult content from search results',
-// 				},
-// 			],
-// 			default: 'moderate',
-// 			description: 'Filters search results for adult content',
-// 		},
-// 		{
-// 			displayName: 'Freshness',
-// 			name: 'freshness',
-// 			type: 'options',
-// 			options: [
-// 				{
-// 					name: 'Past Day',
-// 					value: 'pd',
-// 					description: 'Discovered within the last 24 hours',
-// 				},
-// 				{
-// 					name: 'Past Week',
-// 					value: 'pw',
-// 					description: 'Discovered within the last 7 days',
-// 				},
-// 				{
-// 					name: 'Past Month',
-// 					value: 'pm',
-// 					description: 'Discovered within the last 31 days',
-// 				},
-// 				{
-// 					name: 'Past Year',
-// 					value: 'py',
-// 					description: 'Discovered within the last 365 days',
-// 				},
-// 			],
-// 			default: 'py',
-// 			description: 'Filters search results by when they were discovered',
-// 		},
-// 		{
-// 			displayName: 'Text Decorations',
-// 			name: 'text_decorations',
-// 			type: 'boolean',
-// 			default: true,
-// 			description:
-// 				'Whether display strings (e.g., result snippets) should include decoration markers (e.g., highlighting characters)',
-// 		},
-// 		{
-// 			displayName: 'Spellcheck',
-// 			name: 'spellcheck',
-// 			type: 'boolean',
-// 			default: true,
-// 			description:
-// 				'Whether to spellcheck the provided query. If enabled, the modified query is always used for search.',
-// 		},
-// 		{
-// 			displayName: 'Result Filter',
-// 			name: 'result_filter',
-// 			type: 'multiOptions',
-// 			default: ['web', 'query'],
-// 			description:
-// 				'Which result types to permit in the search response (e.g., discussions, videos)',
-// 			options: [
-// 				{
-// 					name: 'Discussions',
-// 					value: 'discussions',
-// 					description: 'Include discussion results',
-// 				},
-// 				{
-// 					name: 'FAQ',
-// 					value: 'faq',
-// 					description: 'Include FAQ results',
-// 				},
-// 				{
-// 					name: 'Infobox',
-// 					value: 'infobox',
-// 					description: 'Include infobox results',
-// 				},
-// 				{
-// 					name: 'Locations',
-// 					value: 'locations',
-// 					description: 'Include location results',
-// 				},
-// 				{
-// 					name: 'News',
-// 					value: 'news',
-// 					description: 'Include news results',
-// 				},
-// 				{
-// 					name: 'Query',
-// 					value: 'query',
-// 					description: 'Include query details',
-// 				},
-// 				{
-// 					name: 'Summarizer',
-// 					value: 'summarizer',
-// 					description: 'Include summarizer results',
-// 				},
-// 				{
-// 					name: 'Videos',
-// 					value: 'videos',
-// 					description: 'Include video results',
-// 				},
-// 				{
-// 					name: 'Web',
-// 					value: 'web',
-// 					description: 'Include web results',
-// 				},
-// 			],
-// 		},
-// 		{
-// 			displayName: 'Goggles',
-// 			name: 'goggles',
-// 			type: 'string',
-// 			typeOptions: {
-// 				multipleValues: true,
-// 			},
-// 			default: [],
-// 			hint: 'This is the hint',
-// 			description:
-// 				'Custom re-ranking on top of Brave’s search index. Supports both a URL where the Goggle is hosted or the definition of the Goggle.',
-// 			placeholder: 'Example: https://raw.githubusercontent.com/…/tech_blogs.goggle',
-// 		},
-// 		{
-// 			displayName: 'Units',
-// 			name: 'units',
-// 			type: 'options',
-// 			options: [
-// 				{
-// 					name: 'None',
-// 					value: '',
-// 					description: 'No specific measurement system',
-// 				},
-// 				{
-// 					name: 'Metric',
-// 					value: 'metric',
-// 					description: 'The standardized measurement system',
-// 				},
-// 				{
-// 					name: 'Imperial',
-// 					value: 'imperial',
-// 					description: 'The British Imperial system of units',
-// 				},
-// 			],
-// 			default: '',
-// 			description:
-// 				'The measurement units. If not provided, units are derived from the search country.',
-// 		},
-// 		{
-// 			displayName: 'Extra Snippets',
-// 			name: 'extra_snippets',
-// 			type: 'boolean',
-// 			default: false,
-// 			description:
-// 				'Whether to include up to 5 additional, alternative excerpts (snippets) from a page. Only available under Free AI, Base AI, Pro AI, Base Data, Pro Data, and Custom plans.',
-// 		},
-// 		{
-// 			displayName: 'Summary',
-// 			name: 'summary',
-// 			type: 'boolean',
-// 			default: false,
-// 			description:
-// 				'Whether to include summary key generation in web search results. Required for summarizer to be enabled.',
-// 		},
-// 	],
-// },
-// ];

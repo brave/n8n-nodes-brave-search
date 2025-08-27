@@ -1,4 +1,8 @@
-export const SpellcheckCountryCodes = [
+/**
+ * Country Codes: For use with the `country` parameter.
+ * @see https://api-dashboard.search.brave.com/app/documentation/spellcheck/codes#country-codes
+ */
+export const CountryCodes: { country: string; code: string }[] = [
 	{
 		country: 'All Regions',
 		code: 'ALL',
@@ -149,7 +153,11 @@ export const SpellcheckCountryCodes = [
 	},
 ];
 
-export const SpellcheckLanguageCodes = [
+/**
+ * Language Codes: For use with the `lang` parameter.
+ * @see https://api-dashboard.search.brave.com/app/documentation/spellcheck/codes#language-codes
+ */
+export const LanguageCodes: { language: string; code: string }[] = [
 	{
 		language: 'Arabic',
 		code: 'ar',

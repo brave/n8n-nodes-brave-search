@@ -1,6 +1,6 @@
 /**
  * Country Codes: For use with the `country` parameter.
- * @see https://api-dashboard.search.brave.com/app/documentation/suggest/codes#country-codes
+ * @see https://api-dashboard.search.brave.com/app/documentation/web-search/codes#country-codes
  */
 export const CountryCodes: { country: string; code: string }[] = [
 	{
@@ -154,8 +154,8 @@ export const CountryCodes: { country: string; code: string }[] = [
 ];
 
 /**
- * Language Codes: For use with the `lang` parameter.
- * @see https://api-dashboard.search.brave.com/app/documentation/suggest/codes#language-codes
+ * Language Codes: For use with the `search_lang` parameter.
+ * @see https://api-dashboard.search.brave.com/app/documentation/web-search/codes#language-codes
  */
 export const LanguageCodes: { language: string; code: string }[] = [
 	{
@@ -357,5 +357,202 @@ export const LanguageCodes: { language: string; code: string }[] = [
 	{
 		language: 'Vietnamese',
 		code: 'vi',
+	},
+];
+
+/**
+ * Market Codes: For use with the `ui_lang` parameter.
+ * @see https://api-dashboard.search.brave.com/app/documentation/web-search/codes#market-codes
+ */
+export const MarketCodes: { country: string; language: string; code: string }[] = [
+	{
+		country: 'Argentina',
+		language: 'Spanish',
+		code: 'es-AR',
+	},
+	{
+		country: 'Australia',
+		language: 'English',
+		code: 'en-AU',
+	},
+	{
+		country: 'Austria',
+		language: 'German',
+		code: 'de-AT',
+	},
+	{
+		country: 'Belgium',
+		language: 'Dutch',
+		code: 'nl-BE',
+	},
+	{
+		country: 'Belgium',
+		language: 'French',
+		code: 'fr-BE',
+	},
+	{
+		country: 'Brazil',
+		language: 'Portuguese',
+		code: 'pt-BR',
+	},
+	{
+		country: 'Canada',
+		language: 'English',
+		code: 'en-CA',
+	},
+	{
+		country: 'Canada',
+		language: 'French',
+		code: 'fr-CA',
+	},
+	{
+		country: 'Chile',
+		language: 'Spanish',
+		code: 'es-CL',
+	},
+	{
+		country: 'Denmark',
+		language: 'Danish',
+		code: 'da-DK',
+	},
+	{
+		country: 'Finland',
+		language: 'Finnish',
+		code: 'fi-FI',
+	},
+	{
+		country: 'France',
+		language: 'French',
+		code: 'fr-FR',
+	},
+	{
+		country: 'Germany',
+		language: 'German',
+		code: 'de-DE',
+	},
+	{
+		country: 'Hong Kong SAR',
+		language: 'Traditional Chinese',
+		code: 'zh-HK',
+	},
+	{
+		country: 'India',
+		language: 'English',
+		code: 'en-IN',
+	},
+	{
+		country: 'Indonesia',
+		language: 'English',
+		code: 'en-ID',
+	},
+	{
+		country: 'Italy',
+		language: 'Italian',
+		code: 'it-IT',
+	},
+	{
+		country: 'Japan',
+		language: 'Japanese',
+		code: 'ja-JP',
+	},
+	{
+		country: 'Korea',
+		language: 'Korean',
+		code: 'ko-KR',
+	},
+	{
+		country: 'Malaysia',
+		language: 'English',
+		code: 'en-MY',
+	},
+	{
+		country: 'Mexico',
+		language: 'Spanish',
+		code: 'es-MX',
+	},
+	{
+		country: 'Netherlands',
+		language: 'Dutch',
+		code: 'nl-NL',
+	},
+	{
+		country: 'New Zealand',
+		language: 'English',
+		code: 'en-NZ',
+	},
+	{
+		country: 'Norway',
+		language: 'Norwegian',
+		code: 'no-NO',
+	},
+	{
+		country: "People's republic of China",
+		language: 'Chinese',
+		code: 'zh-CN',
+	},
+	{
+		country: 'Poland',
+		language: 'Polish',
+		code: 'pl-PL',
+	},
+	{
+		country: 'Republic of the Philippines',
+		language: 'English',
+		code: 'en-PH',
+	},
+	{
+		country: 'Russia',
+		language: 'Russian',
+		code: 'ru-RU',
+	},
+	{
+		country: 'South Africa',
+		language: 'English',
+		code: 'en-ZA',
+	},
+	{
+		country: 'Spain',
+		language: 'Spanish',
+		code: 'es-ES',
+	},
+	{
+		country: 'Sweden',
+		language: 'Swedish',
+		code: 'sv-SE',
+	},
+	{
+		country: 'Switzerland',
+		language: 'French',
+		code: 'fr-CH',
+	},
+	{
+		country: 'Switzerland',
+		language: 'German',
+		code: 'de-CH',
+	},
+	{
+		country: 'Taiwan',
+		language: 'Traditional Chinese',
+		code: 'zh-TW',
+	},
+	{
+		country: 'Turkey',
+		language: 'Turkish',
+		code: 'tr-TR',
+	},
+	{
+		country: 'United Kingdom',
+		language: 'English',
+		code: 'en-GB',
+	},
+	{
+		country: 'United States',
+		language: 'English',
+		code: 'en-US',
+	},
+	{
+		country: 'United States',
+		language: 'Spanish',
+		code: 'es-US',
 	},
 ];

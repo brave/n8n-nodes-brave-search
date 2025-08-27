@@ -1,5 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
-import { SuggestCountryCodes, SuggestLanguageCodes } from './data';
+import { CountryCodes, LanguageCodes } from './data';
 
 const parameters: INodeProperties[] = [];
 const optional_parameters: INodeProperties['options'] = [];
@@ -37,7 +37,7 @@ optional_parameters.push(
 		type: 'options' as const,
 		default: 'US',
 		description: 'An associated country code. This is used as a hint. Default is "US".',
-		options: SuggestCountryCodes.map(({ country, code }) => {
+		options: CountryCodes.map(({ country, code }) => {
 			return {
 				name: `${country} (${code})`,
 				value: code,
@@ -50,7 +50,7 @@ optional_parameters.push(
 		type: 'options' as const,
 		default: 'en',
 		description: 'An associated 2-or-more character language code. Default is "en".',
-		options: SuggestLanguageCodes.map(({ language, code }) => {
+		options: LanguageCodes.map(({ language, code }) => {
 			return {
 				name: `${language} (${code})`,
 				value: code,

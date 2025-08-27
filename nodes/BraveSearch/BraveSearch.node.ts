@@ -79,6 +79,21 @@ export class BraveSearch implements INodeType {
 			if (type === 'collection' && name === 'additionalParameters') {
 				const additional_parameters = ctx.getNodeParameter('additionalParameters', index) ?? {};
 				Object.entries(additional_parameters).forEach(([key, value]) => {
+					// TODO (Sampson): Move specialized handling to the operation's `buildQuery` method
+					if (key === 'result_filter') value = value.join(',');
+					/**
+					 * TODO (Sampson): Add support for multiple goggles.
+					 * The API currently does not support a comma-separated
+					 * list of goggle URLs. As such, we would need to pass
+					 * multiple goggle URLs as separate parameters on the
+					 * query string (e.g. `goggles=url1&goggles=url2`).
+					 * For now, we will just pass the first goggle URL.
+					 */
+					if (key === 'goggles') {
+						const [url] = value.flat();
+						if (url?.trim().length) value = url;
+						else return; // Skip if no goggles are provided
+					}
 					params[key] = value;
 				});
 			} else {
@@ -92,6 +107,7 @@ export class BraveSearch implements INodeType {
 	static async performRequest(ctx: IExecuteFunctions, index: number): Promise<any> {
 		const operation = OPERATIONS[ctx.getNodeParameter('operation', index)];
 		const params = BraveSearch.buildParams(ctx, operation, index);
+		// TODO (Sampson): Modify this approach to support multiple goggle URLs, etc.
 		const response = await ctx.helpers.httpRequestWithAuthentication.call(ctx, 'braveSearchApi', {
 			url: `https://api.search.brave.com/res/v1${operation.endpoint}`,
 			qs: operation.buildQuery(params),

@@ -19,6 +19,13 @@ export class BraveSearchApi implements ICredentialType {
 			default: '',
 			typeOptions: { password: true },
 		},
+		{
+			displayName: 'Enable Debug Logging',
+			name: 'debug',
+			type: 'boolean',
+			default: false,
+			description: 'Whether to enable detailed logging of API requests and responses for troubleshooting',
+		},
 	];
 
 	authenticate: IAuthenticateGeneric = {

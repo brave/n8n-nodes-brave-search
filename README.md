@@ -9,14 +9,19 @@ Power your search and AI apps with the fastest growing independent search engine
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Operations](#operations)
-- [Credentials](#credentials)
-- [Compatibility](#compatibility)
-- [Usage](#usage)
-- [Resources](#resources)
-- [Development](#development)
-- [Version history](#version-history)
+- [n8n-nodes-brave-search](#n8n-nodes-brave-search)
+	- [Table of Contents](#table-of-contents)
+	- [Installation](#installation)
+	- [Operations](#operations)
+	- [Credentials](#credentials)
+	- [Compatibility](#compatibility)
+	- [Usage](#usage)
+	- [Resources](#resources)
+	- [Development](#development)
+		- [Quick Start (Recommended)](#quick-start-recommended)
+		- [Manual Development Setup](#manual-development-setup)
+		- [Alternative: System Environment Variables](#alternative-system-environment-variables)
+		- [First-Time Setup Notes](#first-time-setup-notes)
 
 ## Installation
 
@@ -29,6 +34,8 @@ This node presently supports search operations for general _web_ results, as wel
 ## Credentials
 
 An API key is required in order to issue calls to the Brave Search API. Get started for FREE with 1 query/second, and 2,000 queries/month. Sign up to retrieve your API key at https://brave.com/search/api/.
+
+Optional: Enable debug logging in credentials to log request/response details during development.
 
 ## Compatibility
 

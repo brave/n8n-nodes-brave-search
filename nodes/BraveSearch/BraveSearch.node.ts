@@ -1,5 +1,4 @@
 import {
-	NodeApiError,
 	NodeParameterValue,
 	type IExecuteFunctions,
 	type INodeExecutionData,
@@ -8,6 +7,8 @@ import {
 } from 'n8n-workflow';
 
 import { OPERATIONS, PROPERTIES, type BraveSearchOperation } from './operations';
+import { BraveSearchDebugger, type RequestDebugInfo, type ResponseDebugInfo } from './utils/debug';
+import { BraveSearchErrorHandler } from './utils/errorHandler';
 
 /**
  * https://docs.n8n.io/integrations/creating-nodes/overview/
@@ -53,12 +54,13 @@ export class BraveSearch implements INodeType {
 					continue;
 				}
 
-				if (error.context) {
-					error.context.itemIndex = i;
-					throw error;
-				}
-
-				throw new NodeApiError(this.getNode(), error, { itemIndex: i });
+				// Use enhanced error handling for better user experience
+				const enhancedError = BraveSearchErrorHandler.createUserFriendlyError(
+					this.getNode(),
+					error,
+					i
+				);
+				throw enhancedError;
 			}
 		}
 
@@ -73,31 +75,12 @@ export class BraveSearch implements INodeType {
 		const params = {} as Record<string, NodeParameterValue>;
 
 		for (const { name, type } of operation.parameters) {
-			const nodeParam = ctx.getNodeParameter(name, index);
-
-			// We use collections for 'Additional Parameters', so we need to iterate over their options
-			if (type === 'collection' && name === 'additionalParameters') {
-				const additional_parameters = ctx.getNodeParameter('additionalParameters', index) ?? {};
-				Object.entries(additional_parameters).forEach(([key, value]) => {
-					// TODO (Sampson): Move specialized handling to the operation's `buildQuery` method
-					if (key === 'result_filter') value = value.join(',');
-					/**
-					 * TODO (Sampson): Add support for multiple goggles.
-					 * The API currently does not support a comma-separated
-					 * list of goggle URLs. As such, we would need to pass
-					 * multiple goggle URLs as separate parameters on the
-					 * query string (e.g. `goggles=url1&goggles=url2`).
-					 * For now, we will just pass the first goggle URL.
-					 */
-					if (key === 'goggles') {
-						const [url] = value.flat();
-						if (url?.trim().length) value = url;
-						else return; // Skip if no goggles are provided
-					}
-					params[key] = value;
-				});
+			if (type === 'collection') {
+				const collectionParams =
+					(ctx.getNodeParameter(name, index, {}) as Record<string, NodeParameterValue>) ?? {};
+				Object.assign(params, collectionParams);
 			} else {
-				params[name] = nodeParam as NodeParameterValue;
+				params[name] = ctx.getNodeParameter(name, index) as NodeParameterValue;
 			}
 		}
 
@@ -107,14 +90,56 @@ export class BraveSearch implements INodeType {
 	static async performRequest(ctx: IExecuteFunctions, index: number): Promise<any> {
 		const operation = OPERATIONS[ctx.getNodeParameter('operation', index)];
 		const params = BraveSearch.buildParams(ctx, operation, index);
-		// TODO (Sampson): Modify this approach to support multiple goggle URLs, etc.
-		const response = await ctx.helpers.httpRequestWithAuthentication.call(ctx, 'braveSearchApi', {
-			url: `https://api.search.brave.com/res/v1${operation.endpoint}`,
-			qs: operation.buildQuery(params),
-			returnFullResponse: true,
-			json: true,
-		});
+		const queryParams = operation.buildQuery(params);
+		const url = `https://api.search.brave.com/res/v1${operation.endpoint}`;
 
-		return response.body;
+		const startTime = performance.now();
+		let requestInfo: RequestDebugInfo | undefined;
+
+		if (await BraveSearchDebugger.shouldDebug(ctx, index)) {
+			requestInfo = {
+				url,
+				queryParams,
+				headers: {
+					'X-Subscription-Token': '[REDACTED]',
+					'Accept': 'application/json',
+					'Accept-Encoding': 'gzip'
+				},
+				operation: operation.key,
+				timestamp: new Date().toISOString()
+			};
+			await BraveSearchDebugger.logRequest(ctx, requestInfo);
+		}
+
+		try {
+			// TODO (Sampson): Modify this approach to support multiple goggle URLs, etc.
+			const response = await ctx.helpers.httpRequestWithAuthentication.call(ctx, 'braveSearchApi', {
+				url,
+				qs: queryParams,
+				returnFullResponse: true,
+				json: true,
+			});
+
+			if (await BraveSearchDebugger.shouldDebug(ctx, index)) {
+				const responseInfo: ResponseDebugInfo = {
+					statusCode: response.statusCode,
+					headers: response.headers,
+					bodySize: JSON.stringify(response.body).length,
+					hasError: false,
+					timestamp: new Date().toISOString(),
+					duration: Math.round(performance.now() - startTime)
+				};
+				await BraveSearchDebugger.logResponse(ctx, responseInfo, response.body);
+			}
+
+			return response.body;
+		} catch (error) {
+			if (await BraveSearchDebugger.shouldDebug(ctx, index)) {
+				await BraveSearchDebugger.logError(ctx, error, requestInfo);
+			}
+
+			// Enhanced error handling - create user-friendly error
+			throw BraveSearchErrorHandler.createUserFriendlyError(ctx.getNode(), error);
+		}
 	}
 }

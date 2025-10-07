@@ -63,7 +63,7 @@
     "typescript": "5.9.2"
   },
   "peerDependencies": {
-    "n8n-workflow": "1.110.0"
+    "n8n-workflow": "1.111.0"
   },
   "pnpm": {
     "overrides": {

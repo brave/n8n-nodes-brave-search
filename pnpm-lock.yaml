@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  form-data: 4.0.4
+  form-data: 4.0.5
 
 importers:
 
@@ -611,8 +611,8 @@ packages:
     resolution: {integrity: sha512-0OABksIGrxKK8K4kynWkQ7y1zounQxP+CWnyclVwj81KW3vlLlGUx57DKGcP/LH216GzqnstnPocF16Nxs0Ycg==}
     engines: {node: '>=0.10.0'}
 
-  form-data@4.0.4:
-    resolution: {integrity: sha512-KrGhL9Q4zjj0kiUt5OO4Mr/A/jlI2jDYs5eHBpYHPcBEVSiipAvn2Ko2HnPe20rmcuuvMHNdZFp+4IlGTMF0Ow==}
+  form-data@4.0.5:
+    resolution: {integrity: sha512-8RipRLol37bNs2bhoV67fiTEvdTrbMUYcFTiy3+wuuOnUog2QBHCZWXDRijWQfAkhBj2Uf5UnVaiWwA5vdd82w==}
     engines: {node: '>= 6'}
 
   fs-mkdirp-stream@2.0.1:
@@ -2021,7 +2021,7 @@ snapshots:
     dependencies:
       for-in: 1.0.2
 
-  form-data@4.0.4:
+  form-data@4.0.5:
     dependencies:
       asynckit: 0.4.0
       combined-stream: 1.0.8
@@ -2368,7 +2368,7 @@ snapshots:
       ast-types: 0.15.2
       callsites: 3.1.0
       esprima-next: 5.8.4
-      form-data: 4.0.4
+      form-data: 4.0.5
       jmespath: 0.16.0
       js-base64: 3.7.2
       jssha: 3.3.1

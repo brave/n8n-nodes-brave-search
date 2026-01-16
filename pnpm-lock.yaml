@@ -12,8 +12,8 @@ importers:
   .:
     dependencies:
       n8n-workflow:
-        specifier: 1.120.0
-        version: 1.120.0
+        specifier: 1.120.4
+        version: 1.120.4
     devDependencies:
       '@types/node':
         specifier: 24.10.1
@@ -976,8 +976,8 @@ packages:
     resolution: {integrity: sha512-32GSKM3Wyc8dg/p39lWPKYu8zci9mJFzV1Np9Of0ZEpe6Fhssn/FbI7ywAMd40uX+p3ZKh3T5EeCFv81qS3HmQ==}
     engines: {node: '>= 10.13.0'}
 
-  n8n-workflow@1.120.0:
-    resolution: {integrity: sha512-EqMvW5J7ontULkigLJ9U6AsLKjWQetPl6nzN7jFkAuONuyHHco5bs0El4sHtxiJ+7EuxHSdby3WHUDMOhlW05A==}
+  n8n-workflow@1.120.4:
+    resolution: {integrity: sha512-FX2DlumVrRGDOqybzjdt7/5miGrsuIpaY9Bb0jYTeEm/XZuw88+5GGeETp4guEBeyfhWcvrlfRC16lMaTrDbog==}
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
@@ -2415,7 +2415,7 @@ snapshots:
 
   mute-stdout@2.0.0: {}
 
-  n8n-workflow@1.120.0:
+  n8n-workflow@1.120.4:
     dependencies:
       '@n8n/errors': 0.5.0
       '@n8n/tournament': 1.0.6

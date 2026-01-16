@@ -24,7 +24,7 @@
     "node": ">=18.10",
     "pnpm": ">=9.1"
   },
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "pnpm@10.27.0",
   "main": "index.js",
   "scripts": {
     "preinstall": "npx only-allow pnpm",

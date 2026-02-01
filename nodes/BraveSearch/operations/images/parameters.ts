@@ -35,7 +35,6 @@ optional_parameters.push(
 		displayName: 'Country',
 		name: 'country',
 		type: 'options',
-		// eslint-disable-next-line n8n-nodes-base/node-param-default-wrong-for-options
 		default: 'US',
 		description: 'The search query country, where the results come from',
 		options: CountryCodes.map(({ country: name, code: value }) => ({ name, value })),
@@ -44,7 +43,6 @@ optional_parameters.push(
 		displayName: 'Language',
 		name: 'search_lang',
 		type: 'options',
-		// eslint-disable-next-line n8n-nodes-base/node-param-default-wrong-for-options
 		default: 'en',
 		description: 'The search language preference',
 		options: LanguageCodes.map(({ language: name, code: value }) => ({ name, value })),

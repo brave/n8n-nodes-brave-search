@@ -63,12 +63,9 @@
     "typescript": "5.9.3"
   },
   "peerDependencies": {
-    "n8n-workflow": "1.120.6"
+    "n8n-workflow": "2.6.0"
   },
   "pnpm": {
-    "overrides": {
-      "form-data": "4.0.5"
-    },
     "onlyBuiltDependencies": [
       "es5-ext",
       "eslint-plugin-n8n-nodes-base"

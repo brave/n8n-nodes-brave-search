@@ -35,7 +35,6 @@ optional_parameters.push(
 		displayName: 'Country',
 		name: 'country',
 		type: 'options',
-		// eslint-disable-next-line n8n-nodes-base/node-param-default-wrong-for-options
 		default: 'US',
 		description:
 			'The search query country, where the results come from. The country string is limited to 2 character country codes of supported countries.',
@@ -45,7 +44,6 @@ optional_parameters.push(
 		displayName: 'Search Language',
 		name: 'search_lang',
 		type: 'options',
-		// eslint-disable-next-line n8n-nodes-base/node-param-default-wrong-for-options
 		default: 'en',
 		description:
 			'The language of the search query. The language string is limited to 2 character language codes of supported languages.',
@@ -55,7 +53,6 @@ optional_parameters.push(
 		displayName: 'User Interface Language',
 		name: 'ui_lang',
 		type: 'options',
-		// eslint-disable-next-line n8n-nodes-base/node-param-default-wrong-for-options
 		default: 'en-US',
 		description:
 			'User interface language preferred in response. Usually of the format <language_code>-<country_code>. For more, see <a href="https://www.rfc-editor.org/rfc/rfc9110.html#name-accept-language">RFC 9110</a>.',

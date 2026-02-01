@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       n8n-workflow:
-        specifier: '*'
+        specifier: 2.6.0
         version: 2.6.0
     devDependencies:
       '@types/node':

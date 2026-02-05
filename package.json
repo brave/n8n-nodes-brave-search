@@ -1,6 +1,6 @@
 {
   "name": "@brave/n8n-nodes-brave-search",
-  "version": "1.0.27",
+  "version": "1.0.28",
   "description": "A n8n node for the Brave Search API",
   "keywords": [
     "api",

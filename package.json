@@ -24,7 +24,7 @@
     "node": ">=18.10",
     "pnpm": ">=9.1"
   },
-  "packageManager": "pnpm@10.27.0",
+  "packageManager": "pnpm@10.28.2",
   "main": "index.js",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
@@ -63,7 +63,7 @@
     "typescript": "5.9.3"
   },
   "peerDependencies": {
-    "n8n-workflow": "2.6.0"
+    "n8n-workflow": ">= 2 < 3"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

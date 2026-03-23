@@ -2,7 +2,7 @@ import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import tsParser from '@typescript-eslint/parser';
 import nodesBasePlugin from 'eslint-plugin-n8n-nodes-base';
-import jsoncParser from 'jsonc-eslint-parser';
+import * as jsoncParser from 'jsonc-eslint-parser';
 
 export default defineConfig(
 	{ ignores: ['**/dist/**', '**/node_modules/**', '**/*.js'] },

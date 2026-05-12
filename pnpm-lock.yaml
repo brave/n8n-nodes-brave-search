@@ -6,14 +6,15 @@ settings:
 
 overrides:
   flatted: '>=3.4.2'
+  n8n-workflow: 2.17.2
 
 importers:
 
   .:
     dependencies:
       n8n-workflow:
-        specifier: '>= 2 < 3'
-        version: 2.7.0
+        specifier: 2.17.2
+        version: 2.17.2
     devDependencies:
       '@types/node':
         specifier: 25.5.0
@@ -116,8 +117,11 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@n8n/errors@0.6.0':
-    resolution: {integrity: sha512-oVJ0lgRYJY6/aPOW2h37ea5T+nX7/wULRn5FymwYeaiYlsLdqwIQEtGwZrajpzxJB0Os74u4lSH3WWQgZCkgxQ==}
+  '@n8n/errors@0.7.0':
+    resolution: {integrity: sha512-fz3VnXwiCk8B+u5vPg/49hz0b9X/RRMdaG+BgV9bozDMu390e2obAx9GPY75e3wht+p6i+6gt3C16eBabcXwNA==}
+
+  '@n8n/expression-runtime@0.9.1':
+    resolution: {integrity: sha512-XMKu0q/whZyB4U/yH3KBoo09Gtw90ScIl8aNPa1nqH9NT/y66cbeAGjzchQSDwjwr6wXQWEztyzyUP4RZhF9ng==}
 
   '@n8n/tournament@1.0.6':
     resolution: {integrity: sha512-UGSxYXXVuOX0yL6HTLBStKYwLIa0+JmRKiSZSCMcM2s2Wax984KWT6XIA1TR/27i7yYpDk1MY14KsTPnuEp27A==}
@@ -850,12 +854,16 @@ packages:
     resolution: {integrity: sha512-WhB9zCku7EGTj/HQQRz5aUQEUeoQZH2bWcltRErOpymJ4boYE6wL9Tbr23krRPSZ+C5zqNSrSw+Cc7sZZ4b7vg==}
     engines: {node: '>=0.10.0'}
 
+  isolated-vm@6.1.2:
+    resolution: {integrity: sha512-GGfsHqtlZiiurZaxB/3kY7LLAXR3sgzDul0fom4cSyBjx6ZbjpTrFWiH3z/nUfLJGJ8PIq9LQmQFiAxu24+I7A==}
+    engines: {node: '>=22.0.0'}
+
   jmespath@0.16.0:
     resolution: {integrity: sha512-9FzQjJ7MATs1tSpnco1K6ayiYE3figslrXA72G2HQ/n76RzvYlofyi5QM+iX4YRs/pu3yzxlVQSST23+dMDknw==}
     engines: {node: '>= 0.6.0'}
 
-  js-base64@3.7.2:
-    resolution: {integrity: sha512-NnRs6dsyqUXejqk/yv2aiXlAvOs56sLkX6nUdeaNezI5LFFLlsZjOThmwnrcwh5ZZRwZlCMnVAY3CvhIhoVEKQ==}
+  js-base64@3.7.8:
+    resolution: {integrity: sha512-hNngCeKxIUQiEUN3GPJOkz4wF/YvdUdbNL9hsBcMQTkKzboD7T/q3OYOuuPZLUE6dBxSGpwhk5mwuDud7JVAow==}
 
   js-yaml@4.1.1:
     resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
@@ -874,8 +882,8 @@ packages:
     resolution: {integrity: sha512-75EA7EWZExL/j+MDKQrRbdzcRI2HOkRlmUw8fZJc1ioqFEOvBsq7Rt+A6yCxOt9w/TYNpkt52gC6nm/g5tFIng==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
-  jsonrepair@3.13.1:
-    resolution: {integrity: sha512-WJeiE0jGfxYmtLwBTEk8+y/mYcaleyLXWaqp5bJu0/ZTSeG0KQq/wWQ8pmnkKenEdN6pdnn6QtcoSUkbqDHWNw==}
+  jsonrepair@3.13.2:
+    resolution: {integrity: sha512-Leuly0nbM4R+S5SVJk3VHfw1oxnlEK9KygdZvfUtEtTawNDyzB4qa1xWTmFt1aeoA7sXZkVTRuIixJ8bAvqVUg==}
     hasBin: true
 
   jssha@3.3.1:
@@ -907,8 +915,8 @@ packages:
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
-  lodash@4.17.23:
-    resolution: {integrity: sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==}
+  lodash@4.18.1:
+    resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
   lower-case@2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
@@ -954,14 +962,18 @@ packages:
     resolution: {integrity: sha512-32GSKM3Wyc8dg/p39lWPKYu8zci9mJFzV1Np9Of0ZEpe6Fhssn/FbI7ywAMd40uX+p3ZKh3T5EeCFv81qS3HmQ==}
     engines: {node: '>= 10.13.0'}
 
-  n8n-workflow@2.7.0:
-    resolution: {integrity: sha512-5klwYF/tTGDXOiNg9sZXaWj5sQ25rrhQ1Tosho9f0kVPNAfQmOK09616K7dDyMB+Wqg4qTs/OkSN0+4LNPAZIg==}
+  n8n-workflow@2.17.2:
+    resolution: {integrity: sha512-IYoiLhRcwGokioIbYy7BdPiCozr7crvti6SEFQMijO4aoV24bffYnSxlhkzlUKt03R8epEfLSP7TisLpsMWolA==}
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
   no-case@3.0.4:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
+
+  node-gyp-build@4.8.4:
+    resolution: {integrity: sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==}
+    hasBin: true
 
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
@@ -1298,6 +1310,10 @@ packages:
   util@0.12.5:
     resolution: {integrity: sha512-kZf/K6hEIrWHI6XqOFUiiMa+79wE/D8Q+NCNAWclkyg3b4d2k7s0QGepNjiABc+aR3N1PAyHL7p6UcLY6LmrnA==}
 
+  uuid@10.0.0:
+    resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
+    hasBin: true
+
   v8flags@4.0.1:
     resolution: {integrity: sha512-fcRLaS4H/hrZk9hYwbdRM35D0U8IYMfEClhXxCivOojl+yTRAZH3Zy2sSy6qVCiGbV9YAtPssP6jaChqC9vPCg==}
     engines: {node: '>= 10.13.0'}
@@ -1448,9 +1464,22 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@n8n/errors@0.6.0':
+  '@n8n/errors@0.7.0':
     dependencies:
       callsites: 3.1.0
+
+  '@n8n/expression-runtime@0.9.1':
+    dependencies:
+      '@n8n/errors': 0.7.0
+      '@n8n/tournament': 1.0.6
+      isolated-vm: 6.1.2
+      js-base64: 3.7.8
+      jssha: 3.3.1
+      lodash: 4.18.1
+      luxon: 3.7.2
+      md5: 2.3.0
+      title-case: 3.0.3
+      transliteration: 2.3.5
 
   '@n8n/tournament@1.0.6':
     dependencies:
@@ -2249,9 +2278,13 @@ snapshots:
 
   isobject@3.0.1: {}
 
+  isolated-vm@6.1.2:
+    dependencies:
+      node-gyp-build: 4.8.4
+
   jmespath@0.16.0: {}
 
-  js-base64@3.7.2: {}
+  js-base64@3.7.8: {}
 
   js-yaml@4.1.1:
     dependencies:
@@ -2269,7 +2302,7 @@ snapshots:
       eslint-visitor-keys: 5.0.1
       semver: 7.7.3
 
-  jsonrepair@3.13.1: {}
+  jsonrepair@3.13.2: {}
 
   jssha@3.3.1: {}
 
@@ -2302,7 +2335,7 @@ snapshots:
 
   lodash.merge@4.6.2: {}
 
-  lodash@4.17.23: {}
+  lodash@4.18.1: {}
 
   lower-case@2.0.2:
     dependencies:
@@ -2343,24 +2376,26 @@ snapshots:
 
   mute-stdout@2.0.0: {}
 
-  n8n-workflow@2.7.0:
+  n8n-workflow@2.17.2:
     dependencies:
-      '@n8n/errors': 0.6.0
+      '@n8n/errors': 0.7.0
+      '@n8n/expression-runtime': 0.9.1
       '@n8n/tournament': 1.0.6
       ast-types: 0.16.1
       callsites: 3.1.0
       esprima-next: 5.8.4
       form-data: 4.0.4
       jmespath: 0.16.0
-      js-base64: 3.7.2
-      jsonrepair: 3.13.1
+      js-base64: 3.7.8
+      jsonrepair: 3.13.2
       jssha: 3.3.1
-      lodash: 4.17.23
+      lodash: 4.18.1
       luxon: 3.7.2
       md5: 2.3.0
       recast: 0.22.0
       title-case: 3.0.3
       transliteration: 2.3.5
+      uuid: 10.0.0
       xml2js: 0.6.2
       zod: 3.25.67
 
@@ -2370,6 +2405,8 @@ snapshots:
     dependencies:
       lower-case: 2.0.2
       tslib: 2.8.1
+
+  node-gyp-build@4.8.4: {}
 
   normalize-path@3.0.0: {}
 
@@ -2702,6 +2739,8 @@ snapshots:
       is-generator-function: 1.1.2
       is-typed-array: 1.1.15
       which-typed-array: 1.1.20
+
+  uuid@10.0.0: {}
 
   v8flags@4.0.1: {}
 

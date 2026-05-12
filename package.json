@@ -63,7 +63,7 @@
     "typescript": "5.9.3"
   },
   "peerDependencies": {
-    "n8n-workflow": ">= 2 < 3"
+    "n8n-workflow": ">= 2.17.2 < 3"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -71,7 +71,8 @@
       "eslint-plugin-n8n-nodes-base"
     ],
     "overrides": {
-      "flatted": ">=3.4.2"
+      "flatted": ">=3.4.2",
+      "n8n-workflow": "2.17.2"
     }
   }
 }

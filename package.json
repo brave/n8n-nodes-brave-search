@@ -24,7 +24,7 @@
     "node": ">=18.10",
     "pnpm": ">=9.1"
   },
-  "packageManager": "pnpm@10.32.1",
+  "packageManager": "pnpm@11.1.1",
   "main": "index.js",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
@@ -50,17 +50,17 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "25.5.0",
-    "@typescript-eslint/parser": "8.58.1",
+    "@types/node": "25.7.0",
+    "@typescript-eslint/parser": "8.59.3",
     "concurrently": "9.2.1",
     "cross-env": "10.1.0",
-    "eslint": "9.39.4",
+    "eslint": "10.3.0",
     "eslint-plugin-n8n-nodes-base": "1.16.6",
-    "globals": "17.4.0",
+    "globals": "17.6.0",
     "gulp": "5.0.1",
     "jsonc-eslint-parser": "3.1.0",
-    "prettier": "3.8.1",
-    "typescript": "5.9.3"
+    "prettier": "3.8.3",
+    "typescript": "6.0.3"
   },
   "peerDependencies": {
     "n8n-workflow": ">= 2.17.2 < 3"

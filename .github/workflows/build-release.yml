@@ -11,11 +11,13 @@ jobs:
       # Give the default GITHUB_TOKEN write permission to commit and push the
       # added or changed files to the repository.
       contents: write
+      # Required for npm publish --provenance (OIDC attestation from GitHub → npm).
+      id-token: write
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.ref }}
 
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
@@ -50,7 +52,8 @@ jobs:
           git push
 
       - name: Publish NPM package
-        run: pnpm publish --no-git-checks --access public
+        # n8n Cloud verification requires provenance from GitHub Actions (May 2026+).
+        run: pnpm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

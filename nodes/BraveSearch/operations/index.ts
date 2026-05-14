@@ -4,11 +4,12 @@ import images from './images';
 import videos from './videos';
 import spellcheck from './spellcheck';
 import suggest from './suggest';
+import llm_context from './llm_context';
 
 import type { INodeProperties } from 'n8n-workflow';
 import type { BraveSearchOperation } from './_base';
 
-const operations = [web, news, images, videos, spellcheck, suggest];
+const operations = [web, news, images, videos, spellcheck, suggest, llm_context];
 const map: Record<BraveSearchOperation['key'], BraveSearchOperation> = Object.fromEntries(
 	operations.map((e) => [e.key, e]),
 );

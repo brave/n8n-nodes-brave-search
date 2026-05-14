@@ -53,7 +53,7 @@ jobs:
 
       - name: Publish NPM package
         # n8n Cloud verification requires provenance from GitHub Actions (May 2026+).
-        run: npm publish --provenance --access public
+        run: pnpm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

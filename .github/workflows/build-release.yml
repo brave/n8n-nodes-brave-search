@@ -35,8 +35,10 @@ jobs:
       - name: Bump patch version
         id: bump-version
         run: |
-          VERSION=$(pnpm version patch --no-git-tag-version)
-          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          pnpm version patch --no-git-tag-version
+          # Read semver from package.json; pnpm 11 stdout is not safe for GITHUB_OUTPUT.
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=v${VERSION}" >> $GITHUB_OUTPUT
 
       - name: Build assets
         run: pnpm prepublishOnly

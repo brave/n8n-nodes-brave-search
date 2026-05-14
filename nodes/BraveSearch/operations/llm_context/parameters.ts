@@ -5,17 +5,15 @@ const parameters: INodeProperties[] = [];
 const optional_parameters: INodeProperties['options'] = [];
 
 // The parameters for this operation
-parameters.push(
-	{
-		displayName: 'Query',
-		name: 'query',
-		type: 'string' as const,
-		default: '',
-		description:
-			'The user’s search query term. Query can not be empty. Maximum of 400 characters and 50 words in the query.',
-		required: true,
-	},
-);
+parameters.push({
+	displayName: 'Query',
+	name: 'query',
+	type: 'string' as const,
+	default: '',
+	description:
+		'The user’s search query term. Query can not be empty. Maximum of 400 characters and 50 words in the query.',
+	required: true,
+});
 
 // Optional Parameters
 optional_parameters.push(

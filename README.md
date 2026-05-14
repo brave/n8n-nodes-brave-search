@@ -24,7 +24,7 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Operations
 
-This node presently supports search operations for general _web_ results, as well as _images_, _news_, and _videos_.
+This node presently supports search operations for general _web_ results, as well as _images_, _news_, and _videos_. It can also retrieve pre-extracted _LLM context_ for use with AI agents and RAG pipelines.
 
 ## Credentials
 

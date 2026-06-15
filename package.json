@@ -52,7 +52,7 @@
   "devDependencies": {
     "@types/node": "25.7.0",
     "@typescript-eslint/parser": "8.59.3",
-    "concurrently": "9.2.1",
+    "concurrently": "10.0.3",
     "cross-env": "10.1.0",
     "eslint": "9.39.4",
     "eslint-plugin-n8n-nodes-base": "1.16.6",
@@ -72,7 +72,8 @@
     ],
     "overrides": {
       "flatted": ">=3.4.2",
-      "n8n-workflow": "2.22.0"
+      "n8n-workflow": "2.22.0",
+      "shell-quote": ">=1.8.4"
     }
   }
 }

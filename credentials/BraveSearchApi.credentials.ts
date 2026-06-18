@@ -19,6 +19,14 @@ export class BraveSearchApi implements ICredentialType {
 			default: '',
 			typeOptions: { password: true },
 		},
+		{
+			name: 'baseUrl',
+			displayName: 'Base URL',
+			type: 'hidden',
+			default: 'https://api.search.brave.com/res/v1',
+			required: false,
+			description: 'Base URL for the Brave Search API. Change to use a proxy or regional endpoint.',
+		},
 	];
 
 	authenticate: IAuthenticateGeneric = {
@@ -37,7 +45,7 @@ export class BraveSearchApi implements ICredentialType {
 	 */
 	test: ICredentialTestRequest = {
 		request: {
-			url: 'https://api.search.brave.com/res/v1/web/search',
+			url: '={{$credentials.baseUrl || "https://api.search.brave.com/res/v1"}}/web/search',
 			method: 'GET',
 			headers: {
 				Accept: 'application/json',

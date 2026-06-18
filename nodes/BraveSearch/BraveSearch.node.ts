@@ -115,7 +115,10 @@ export class BraveSearch implements INodeType {
 		const operation = OPERATIONS[ctx.getNodeParameter('operation', index)];
 		const params = BraveSearch.buildParams(ctx, operation, index);
 		const credentials = await ctx.getCredentials('braveSearchApi');
-		const baseUrl = resolveBaseUrl(credentials.baseUrl, API_BASE_URL);
+		const baseUrl =
+			ctx.getNode().typeVersion >= 1.1
+				? resolveBaseUrl(credentials.baseUrl, API_BASE_URL)
+				: API_BASE_URL;
 		// TODO (Sampson): Modify this approach to support multiple goggle URLs, etc.
 		const response = await ctx.helpers.httpRequestWithAuthentication.call(ctx, 'braveSearchApi', {
 			url: `${baseUrl}${operation.endpoint}`,

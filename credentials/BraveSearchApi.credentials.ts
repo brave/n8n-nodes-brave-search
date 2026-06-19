@@ -5,6 +5,8 @@ import type {
 	INodeProperties,
 } from 'n8n-workflow';
 
+import { API_BASE_URL } from '../nodes/BraveSearch/apiConfig';
+
 export class BraveSearchApi implements ICredentialType {
 	name = 'braveSearchApi';
 	icon = 'file:../nodes/BraveSearch/braveSearch.svg' as const;
@@ -18,6 +20,14 @@ export class BraveSearchApi implements ICredentialType {
 			type: 'string',
 			default: '',
 			typeOptions: { password: true },
+		},
+		{
+			name: 'baseUrl',
+			displayName: 'Base URL',
+			type: 'hidden',
+			default: API_BASE_URL,
+			required: false,
+			description: 'Base URL for the Brave Search API. Change to use a proxy or regional endpoint.',
 		},
 	];
 
@@ -37,7 +47,8 @@ export class BraveSearchApi implements ICredentialType {
 	 */
 	test: ICredentialTestRequest = {
 		request: {
-			url: 'https://api.search.brave.com/res/v1/web/search',
+			baseURL: '={{ ($credentials.baseUrl || "${API_BASE_URL}").trim().replace(/[/]+$/, "") }}',
+			url: '/web/search',
 			method: 'GET',
 			headers: {
 				Accept: 'application/json',

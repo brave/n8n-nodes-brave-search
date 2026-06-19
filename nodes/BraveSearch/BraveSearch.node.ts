@@ -7,6 +7,7 @@ import {
 	type INodeTypeDescription,
 } from 'n8n-workflow';
 
+import { resolveBaseUrl, API_BASE_URL } from './constants';
 import { OPERATIONS, PROPERTIES, type BraveSearchOperation } from './operations';
 
 /**
@@ -22,7 +23,7 @@ export class BraveSearch implements INodeType {
 		subtitle: '={{$parameter["operation"]}}',
 		icon: 'file:braveSearch.svg',
 		group: ['transform'],
-		version: 1,
+		version: [1, 1.1],
 		description: 'Search the web using Brave Search',
 		defaults: {
 			name: 'Brave Search',
@@ -107,9 +108,11 @@ export class BraveSearch implements INodeType {
 	static async performRequest(ctx: IExecuteFunctions, index: number): Promise<any> {
 		const operation = OPERATIONS[ctx.getNodeParameter('operation', index)];
 		const params = BraveSearch.buildParams(ctx, operation, index);
+		const credentials = await ctx.getCredentials('braveSearchApi');
+		const baseUrl = resolveBaseUrl(credentials.baseUrl, API_BASE_URL);
 		// TODO (Sampson): Modify this approach to support multiple goggle URLs, etc.
 		const response = await ctx.helpers.httpRequestWithAuthentication.call(ctx, 'braveSearchApi', {
-			url: `https://api.search.brave.com/res/v1${operation.endpoint}`,
+			url: `${baseUrl}${operation.endpoint}`,
 			qs: operation.buildQuery(params),
 			returnFullResponse: true,
 			json: true,

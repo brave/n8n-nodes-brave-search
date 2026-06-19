@@ -45,7 +45,7 @@ export class BraveSearchApi implements ICredentialType {
 	 */
 	test: ICredentialTestRequest = {
 		request: {
-			url: '={{$credentials.baseUrl || "https://api.search.brave.com/res/v1"}}/web/search',
+			url: '={{ ($credentials.baseUrl || "https://api.search.brave.com/res/v1").trim().replace(/[/]+$/, "") }}/web/search',
 			method: 'GET',
 			headers: {
 				Accept: 'application/json',

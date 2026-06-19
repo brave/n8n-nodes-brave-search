@@ -5,7 +5,7 @@ import type {
 	INodeProperties,
 } from 'n8n-workflow';
 
-import { API_BASE_URL } from '../nodes/BraveSearch/apiConfig';
+import { API_BASE_URL } from '../nodes/BraveSearch/constants';
 
 export class BraveSearchApi implements ICredentialType {
 	name = 'braveSearchApi';

@@ -69,11 +69,6 @@
     "onlyBuiltDependencies": [
       "es5-ext",
       "eslint-plugin-n8n-nodes-base"
-    ],
-    "overrides": {
-      "flatted": ">=3.4.2",
-      "n8n-workflow": "2.22.0",
-      "shell-quote": ">=1.8.4"
-    }
+    ]
   }
 }

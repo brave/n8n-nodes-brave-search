@@ -4,13 +4,21 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  flatted: '>=3.4.2'
+  form-data: '>=4.0.6'
+  js-yaml: '>=4.1.2'
+  n8n-workflow: 2.22.0
+  shell-quote: '>=1.8.4'
+  uuid: '>=11.1.1'
+
 importers:
 
   .:
     dependencies:
       n8n-workflow:
-        specifier: '>= 2.17.2 < 3'
-        version: 2.21.0(zod@3.25.67)
+        specifier: 2.22.0
+        version: 2.22.0(zod@3.25.67)
     devDependencies:
       '@types/node':
         specifier: 25.7.0
@@ -120,11 +128,11 @@ packages:
   '@n8n/errors@0.8.0':
     resolution: {integrity: sha512-aAYL79o/bio21zxzXCGwqnvhPcEsK+HqKNz5DsPGY0tMo6FEFT2mowtxcYRoRbHbx9siraJVhiu+VN+Ya7Iv0g==}
 
-  '@n8n/expression-runtime@0.13.0':
-    resolution: {integrity: sha512-4Feqwazwojk8GV+jMRArA9oxFX/29idi8R5Uc3dhTB5/w2O9+lw6H94xiRUw9FbmPErkhloNRiNWYSrD1j2tLA==}
+  '@n8n/expression-runtime@0.14.0':
+    resolution: {integrity: sha512-37Q08JRm6AeL2IlELNISh/sTom12QWlhlTZaPx2wxLT07F/00rrR92o3ZbxFrvunFdgs4LR3N9+RDFfIViyEyg==}
 
-  '@n8n/tournament@1.1.0':
-    resolution: {integrity: sha512-SH3ZvP1yzU5552Cf2RWlyjxLI2terrwBO+otj2oXzcmhfMoyk6gzHyp6b7sqjw0Gu/VBLsANmxu01WR4+n4FLQ==}
+  '@n8n/tournament@1.2.0':
+    resolution: {integrity: sha512-EY/vqijjYi2LhnKeShNXNtVBJW7lSRGFe5D2ikv5AfDZiLOqneRnNdfwZbv1bTLByRYyzY708KiXF8P66Gr1dg==}
     engines: {node: '>=20.15', pnpm: '>=9.5'}
 
   '@types/estree@1.0.9':
@@ -601,8 +609,8 @@ packages:
     resolution: {integrity: sha512-0OABksIGrxKK8K4kynWkQ7y1zounQxP+CWnyclVwj81KW3vlLlGUx57DKGcP/LH216GzqnstnPocF16Nxs0Ycg==}
     engines: {node: '>=0.10.0'}
 
-  form-data@4.0.4:
-    resolution: {integrity: sha512-KrGhL9Q4zjj0kiUt5OO4Mr/A/jlI2jDYs5eHBpYHPcBEVSiipAvn2Ko2HnPe20rmcuuvMHNdZFp+4IlGTMF0Ow==}
+  form-data@4.0.6:
+    resolution: {integrity: sha512-vKatAh4SlVfgbv+YtmhiRjhEMJsYpsG1Y2rMQtR+SVSbytsSD1YGzDIcrAJmdFec88u/+VoGmxnl+80gL1tRCQ==}
     engines: {node: '>= 6'}
 
   fs-mkdirp-stream@2.0.1:
@@ -711,6 +719,10 @@ packages:
 
   hasown@2.0.3:
     resolution: {integrity: sha512-ej4AhfhfL2Q2zpMmLo7U1Uv9+PyhIZpgQLGT1F9miIGmiCJIoCgSmczFdrc97mWT4kVY72KA+WnnhJ5pghSvSg==}
+    engines: {node: '>= 0.4'}
+
+  hasown@2.0.4:
+    resolution: {integrity: sha512-T2UbfbBEF32wiepXIsMlTW9+dDYC6wMh/t/vYA4tuOMKqWz/n3vr1NFSxQiyP+zk2mXsoMA/i/7qV6LKut1t1A==}
     engines: {node: '>= 0.4'}
 
   homedir-polyfill@1.0.3:
@@ -847,8 +859,8 @@ packages:
   js-base64@3.7.8:
     resolution: {integrity: sha512-hNngCeKxIUQiEUN3GPJOkz4wF/YvdUdbNL9hsBcMQTkKzboD7T/q3OYOuuPZLUE6dBxSGpwhk5mwuDud7JVAow==}
 
-  js-yaml@4.1.1:
-    resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
+  js-yaml@5.0.0:
+    resolution: {integrity: sha512-GSvaPUbk1U+FMZ7rJzF+F8e5YVtu7KnD40et/5rBXXRBv2jCO9L3qCewvIDDdudC0QycTFlf6EAA+h3kxBsuUw==}
     hasBin: true
 
   json-buffer@3.0.1:
@@ -944,10 +956,10 @@ packages:
     resolution: {integrity: sha512-32GSKM3Wyc8dg/p39lWPKYu8zci9mJFzV1Np9Of0ZEpe6Fhssn/FbI7ywAMd40uX+p3ZKh3T5EeCFv81qS3HmQ==}
     engines: {node: '>= 10.13.0'}
 
-  n8n-workflow@2.21.0:
-    resolution: {integrity: sha512-Qsp2Tf812CStntTPUN6gbf3Xke4UxTKM4zFbiLCNYyTf49bE049q1ur0KbxsaYcIE0C+bltDa6vESEXmyQ33wA==}
+  n8n-workflow@2.22.0:
+    resolution: {integrity: sha512-3UU7bq7SKRMxUCl0jfPQzM0of/WQVKa56tt9jFWQGHlMvKtReKemEN44PH15fqR+keVMfr7WbfcmwbvKIBA9Fg==}
     peerDependencies:
-      zod: '>=3.25.0 <4'
+      zod: 3.25.67
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
@@ -1296,9 +1308,8 @@ packages:
   util@0.12.5:
     resolution: {integrity: sha512-kZf/K6hEIrWHI6XqOFUiiMa+79wE/D8Q+NCNAWclkyg3b4d2k7s0QGepNjiABc+aR3N1PAyHL7p6UcLY6LmrnA==}
 
-  uuid@10.0.0:
-    resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
-    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+  uuid@14.0.1:
+    resolution: {integrity: sha512-6ZxzVpzDXDa3bJWaHilVayA+BH/1zmxCJoVgvmqJnid/gPoKHxUrS/aC/T6LGQtNHT+XHG9fXPJB4d+IrU30Ew==}
     hasBin: true
 
   v8flags@4.0.1:
@@ -1431,7 +1442,7 @@ snapshots:
       globals: 14.0.0
       ignore: 5.3.2
       import-fresh: 3.3.1
-      js-yaml: 4.1.1
+      js-yaml: 5.0.0
       minimatch: 3.1.5
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
@@ -1472,10 +1483,10 @@ snapshots:
     dependencies:
       callsites: 3.1.0
 
-  '@n8n/expression-runtime@0.13.0':
+  '@n8n/expression-runtime@0.14.0':
     dependencies:
       '@n8n/errors': 0.8.0
-      '@n8n/tournament': 1.1.0
+      '@n8n/tournament': 1.2.0
       isolated-vm: 6.1.2
       js-base64: 3.7.8
       jssha: 3.3.1
@@ -1485,7 +1496,7 @@ snapshots:
       title-case: 3.0.3
       transliteration: 2.3.5
 
-  '@n8n/tournament@1.1.0':
+  '@n8n/tournament@1.2.0':
     dependencies:
       ast-types: 0.16.1
       esprima-next: 5.8.4
@@ -2003,12 +2014,12 @@ snapshots:
     dependencies:
       for-in: 1.0.2
 
-  form-data@4.0.4:
+  form-data@4.0.6:
     dependencies:
       asynckit: 0.4.0
       combined-stream: 1.0.8
       es-set-tostringtag: 2.1.0
-      hasown: 2.0.3
+      hasown: 2.0.4
       mime-types: 2.1.35
 
   fs-mkdirp-stream@2.0.1:
@@ -2146,6 +2157,10 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
+  hasown@2.0.4:
+    dependencies:
+      function-bind: 1.1.2
+
   homedir-polyfill@1.0.3:
     dependencies:
       parse-passwd: 1.0.0
@@ -2257,7 +2272,7 @@ snapshots:
 
   js-base64@3.7.8: {}
 
-  js-yaml@4.1.1:
+  js-yaml@5.0.0:
     dependencies:
       argparse: 2.0.1
 
@@ -2347,15 +2362,15 @@ snapshots:
 
   mute-stdout@2.0.0: {}
 
-  n8n-workflow@2.21.0(zod@3.25.67):
+  n8n-workflow@2.22.0(zod@3.25.67):
     dependencies:
       '@n8n/errors': 0.8.0
-      '@n8n/expression-runtime': 0.13.0
-      '@n8n/tournament': 1.1.0
+      '@n8n/expression-runtime': 0.14.0
+      '@n8n/tournament': 1.2.0
       ast-types: 0.16.1
       callsites: 3.1.0
       esprima-next: 5.8.4
-      form-data: 4.0.4
+      form-data: 4.0.6
       jmespath: 0.16.0
       js-base64: 3.7.8
       jsonrepair: 3.13.2
@@ -2366,7 +2381,7 @@ snapshots:
       recast: 0.22.0
       title-case: 3.0.3
       transliteration: 2.3.5
-      uuid: 10.0.0
+      uuid: 14.0.1
       xml2js: 0.6.2
       zod: 3.25.67
 
@@ -2716,7 +2731,7 @@ snapshots:
       is-typed-array: 1.1.15
       which-typed-array: 1.1.20
 
-  uuid@10.0.0: {}
+  uuid@14.0.1: {}
 
   v8flags@4.0.1: {}
 

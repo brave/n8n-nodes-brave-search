@@ -1,3 +1,10 @@
 allowBuilds:
   eslint-plugin-n8n-nodes-base: true
   isolated-vm: true
+overrides:
+  flatted: '>=3.4.2'
+  form-data: '>=4.0.6'
+  js-yaml: '>=4.1.2'
+  n8n-workflow: 2.22.0
+  shell-quote: '>=1.8.4'
+  uuid: '>=11.1.1'

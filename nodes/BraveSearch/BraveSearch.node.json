@@ -14,5 +14,16 @@
 				"url": "https://api-dashboard.search.brave.com/app/documentation"
 			}
 		]
-	}
+	},
+	"alias": [
+		"search",
+		"web search",
+		"serp",
+		"scrape",
+		"fetch",
+		"webscrape",
+		"brave",
+		"brave search",
+		"search engine"
+	]
 }

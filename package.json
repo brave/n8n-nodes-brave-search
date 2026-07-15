@@ -50,7 +50,7 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "25.7.0",
+    "@types/node": "25.9.5",
     "@typescript-eslint/parser": "8.59.3",
     "concurrently": "10.0.3",
     "cross-env": "10.1.0",

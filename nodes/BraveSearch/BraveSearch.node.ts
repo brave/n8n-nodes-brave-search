@@ -24,8 +24,8 @@ export class BraveSearch implements INodeType {
 		name: 'braveSearch',
 		subtitle: '={{$parameter["operation"]}}',
 		icon: {
-			dark: 'file:braveSearch.svg',
 			light: 'file:braveSearch.svg',
+			dark: 'file:braveSearch.dark.svg',
 		},
 		group: ['transform'],
 		version: [1, 1.1],

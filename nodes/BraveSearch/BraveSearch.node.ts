@@ -1,10 +1,12 @@
 import {
 	NodeApiError,
-	NodeParameterValue,
+	NodeConnectionTypes,
+	type NodeParameterValue,
 	type IExecuteFunctions,
 	type INodeExecutionData,
 	type INodeType,
 	type INodeTypeDescription,
+	type JsonObject,
 } from 'n8n-workflow';
 
 import { resolveBaseUrl, API_BASE_URL } from './constants';
@@ -21,15 +23,18 @@ export class BraveSearch implements INodeType {
 		displayName: 'Brave Search',
 		name: 'braveSearch',
 		subtitle: '={{$parameter["operation"]}}',
-		icon: 'file:braveSearch.svg',
+		icon: {
+			dark: 'file:braveSearch.svg',
+			light: 'file:braveSearch.svg',
+		},
 		group: ['transform'],
 		version: [1, 1.1],
 		description: 'Search the web using Brave Search',
 		defaults: {
 			name: 'Brave Search',
 		},
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [NodeConnectionTypes.Main],
+		outputs: [NodeConnectionTypes.Main],
 		credentials: [
 			{
 				name: 'braveSearchApi',
@@ -54,12 +59,7 @@ export class BraveSearch implements INodeType {
 					continue;
 				}
 
-				if (error.context) {
-					error.context.itemIndex = i;
-					throw error;
-				}
-
-				throw new NodeApiError(this.getNode(), error, { itemIndex: i });
+				throw new NodeApiError(this.getNode(), error as JsonObject, { itemIndex: i });
 			}
 		}
 

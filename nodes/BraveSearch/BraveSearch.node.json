@@ -1,5 +1,5 @@
 {
-	"node": "@brave/n8n-nodes-brave-search",
+	"node": "@brave/n8n-nodes-brave-search.braveSearch",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Productivity", "Miscellaneous", "Utility"],

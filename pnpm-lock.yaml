@@ -36,8 +36,8 @@ importers:
         specifier: 9.39.4
         version: 9.39.4
       eslint-plugin-n8n-nodes-base:
-        specifier: 1.16.6
-        version: 1.16.6(eslint@9.39.4)(typescript@6.0.3)
+        specifier: 1.16.7
+        version: 1.16.7(eslint@9.39.4)(typescript@6.0.3)
       globals:
         specifier: 17.6.0
         version: 17.6.0
@@ -465,8 +465,8 @@ packages:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
 
-  eslint-plugin-n8n-nodes-base@1.16.6:
-    resolution: {integrity: sha512-heQzTeNmCTxElMLrtRAeWtreaXe9QlKEhZNRQfedtE6k15I0acNyfGvPfXwRfShAWJsAsuJYYHRtEPypeB7kyA==}
+  eslint-plugin-n8n-nodes-base@1.16.7:
+    resolution: {integrity: sha512-lKo+stn4t2jXX/ZdmJv2ClUQnRZLwSOyqfqsYgD6I/wYwy9bqA6mna4CEzdQNFVg5f3/RODpd/JQMiITARY92g==}
     engines: {node: '>=20.15', pnpm: '>=9.6'}
 
   eslint-scope@8.4.0:
@@ -488,6 +488,7 @@ packages:
   eslint@9.39.4:
     resolution: {integrity: sha512-XoMjdBOwe/esVgEvLmNsD3IRHkm7fbKIUGvrleloJXUZgDHig2IPWNniv+GwjyJXzuNqVjlr5+4yVUZjycJwfQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -1847,7 +1848,7 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-plugin-n8n-nodes-base@1.16.6(eslint@9.39.4)(typescript@6.0.3):
+  eslint-plugin-n8n-nodes-base@1.16.7(eslint@9.39.4)(typescript@6.0.3):
     dependencies:
       '@typescript-eslint/utils': 8.59.3(eslint@9.39.4)(typescript@6.0.3)
       camel-case: 4.1.2

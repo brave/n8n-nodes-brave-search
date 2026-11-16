@@ -49,16 +49,16 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "25.7.0",
-    "@typescript-eslint/parser": "8.59.3",
-    "concurrently": "10.0.3",
+    "@types/node": "26.6.6",
+    "@typescript-eslint/parser": "8.73.0",
+    "concurrently": "10.0.7",
     "cross-env": "10.1.0",
-    "eslint": "9.39.4",
-    "eslint-plugin-n8n-nodes-base": "1.16.6",
-    "globals": "17.6.0",
+    "eslint": "10.15.0",
+    "eslint-plugin-n8n-nodes-base": "2.0.0",
+    "globals": "17.14.0",
     "gulp": "5.0.1",
-    "jsonc-eslint-parser": "3.1.0",
-    "prettier": "3.8.3",
+    "jsonc-eslint-parser": "3.3.0",
+    "prettier": "3.10.1",
     "typescript": "6.0.3"
   },
   "peerDependencies": {

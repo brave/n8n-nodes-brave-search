@@ -1,65 +1,134 @@
 name: Build Release
 
+# Started by hand. This run bumps the version and commits it, publishes the
+# tarball that same run built, then tags the commit.
+#
+# npm authenticates the publish job by OIDC. The grant is on that job alone,
+# because every step of a job can use it, and that job installs nothing.
 on:
   workflow_dispatch:
 
+# The floor for anything added later. Each job raises only what it uses.
+permissions:
+  contents: read
+
 jobs:
-  publish-npm:
+  build:
+    if: github.repository == 'brave/n8n-nodes-brave-search'
     runs-on: ubuntu-latest
-
     permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
       contents: write
-      # Required for npm publish --provenance (OIDC attestation from GitHub → npm).
-      id-token: write
-
+    outputs:
+      version: ${{ steps.bump-version.outputs.version }}
+      npm-version: ${{ steps.bump-version.outputs.npm-version }}
+      npm-name: ${{ steps.bump-version.outputs.npm-name }}
+      sha: ${{ steps.commit.outputs.sha }}
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.ref }}
+          ref: ${{ github.sha }}
+          # Install and build run with no credential in the checkout. The push
+          # step below is the only one handed the token.
+          persist-credentials: false
 
-      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '24.x'
-          registry-url: 'https://registry.npmjs.org'
 
       - name: Install pnpm
-        uses: pnpm/action-setup@0e279bb959325dab635dd2c09392533439d90093 # v6.0.8
+        uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
         with:
           run_install: true
-
-      - name: Configure Git
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Bump patch version
         id: bump-version
         run: |
+          set -eu
           pnpm version patch --no-git-tag-version
-          # Read semver from package.json; pnpm 11 stdout is not safe for GITHUB_OUTPUT.
+          # pnpm 11 stdout is not safe for GITHUB_OUTPUT, so read the file.
           VERSION=$(node -p "require('./package.json').version")
-          echo "version=v${VERSION}" >> $GITHUB_OUTPUT
+          NAME=$(node -p "require('./package.json').name")
+          echo "version=v${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "npm-version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "npm-name=${NAME}" >> "$GITHUB_OUTPUT"
 
       - name: Build assets
         run: pnpm prepublishOnly
 
-      - name: Bump version and commit build assets
+      - name: Pack the release
         run: |
+          set -eu
+          mkdir -p "$RUNNER_TEMP/pack"
+          npm pack --ignore-scripts --pack-destination "$RUNNER_TEMP/pack"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: npm-tarball
+          path: ${{ runner.temp }}/pack/*.tgz
+          if-no-files-found: error
+
+      - name: Commit and push the version bump
+        id: commit
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add package.json
           git commit -m "ci: update build assets (${{ steps.bump-version.outputs.version }})"
-          git push
+          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF}"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  publish:
+    needs: build
+    if: github.repository == 'brave/n8n-nodes-brave-search' && needs.build.result == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: npm-tarball
+          path: ${{ runner.temp }}/pack
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24.x'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
 
       - name: Publish NPM package
-        # n8n Cloud verification requires provenance from GitHub Actions (May 2026+).
-        run: pnpm publish --provenance --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NAME: ${{ needs.build.outputs.npm-name }}
+          VERSION: ${{ needs.build.outputs.npm-version }}
+        run: |
+          set -eu
+          tarball="$(find "$RUNNER_TEMP/pack" -name '*.tgz' -print -quit)"
+          if [ -z "$tarball" ]; then
+            echo "error: the npm-tarball artifact has no tarball"
+            exit 1
+          fi
+          # n8n Cloud verification requires provenance (May 2026+).
+          # --ignore-scripts keeps a lifecycle script from running here.
+          if npm view "${NAME}@${VERSION}" version >/dev/null 2>&1; then
+            echo "${NAME}@${VERSION} is already on the registry; not publishing it again"
+          else
+            npm publish "$tarball" --access public --provenance --ignore-scripts
+          fi
 
+  release:
+    needs: [build, publish]
+    if: github.repository == 'brave/n8n-nodes-brave-search' && needs.publish.result == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
       - name: Create release
-        uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda # v3.0.0
+        uses: softprops/action-gh-release@8a0cd651e5b2365bd640854a3fa5dfc70e4875f3 # v3.0.4
         with:
-          tag_name: ${{ steps.bump-version.outputs.version }}
+          tag_name: ${{ needs.build.outputs.version }}
+          target_commitish: ${{ needs.build.outputs.sha }}
           generate_release_notes: true
           make_latest: true

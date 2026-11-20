@@ -59,7 +59,7 @@
     "gulp": "5.0.1",
     "jsonc-eslint-parser": "3.3.0",
     "prettier": "3.10.1",
-    "typescript": "6.0.3"
+    "typescript": "7.0.2"
   },
   "peerDependencies": {
     "n8n-workflow": "*"
